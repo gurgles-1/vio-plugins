@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Silo-Server/silo-plugin-sdk/pkg/pluginsdk/runtimehost"
 	sdkruntime "github.com/Silo-Server/silo-plugin-sdk/pkg/pluginsdk/runtime"
+	"github.com/Silo-Server/silo-plugin-sdk/pkg/pluginsdk/runtimehost"
 )
 
 const syncSourceKey = "pmdb-lists"
@@ -22,16 +22,16 @@ type listStat struct {
 }
 
 type syncResult struct {
-	StartedAt    time.Time         `json:"started_at"`
-	FinishedAt   time.Time         `json:"finished_at"`
-	Skipped      bool              `json:"skipped"`
-	SkipReason   string            `json:"skip_reason,omitempty"`
-	Lists        map[string]listStat `json:"lists"`
-	Registered   int               `json:"registered"`
-	Removed      int               `json:"removed"`
-	SkippedIMDb  int               `json:"skipped_no_imdb"`
-	Reconciled   bool              `json:"reconciled"`
-	Errors       []string          `json:"errors"`
+	StartedAt   time.Time           `json:"started_at"`
+	FinishedAt  time.Time           `json:"finished_at"`
+	Skipped     bool                `json:"skipped"`
+	SkipReason  string              `json:"skip_reason,omitempty"`
+	Lists       map[string]listStat `json:"lists"`
+	Registered  int                 `json:"registered"`
+	Removed     int                 `json:"removed"`
+	SkippedIMDb int                 `json:"skipped_no_imdb"`
+	Reconciled  bool                `json:"reconciled"`
+	Errors      []string            `json:"errors"`
 }
 
 // resolveStatePath mirrors the reference plugin: relative paths live under
@@ -51,9 +51,9 @@ func resolveStatePath(file string) string {
 }
 
 type persistedState struct {
-	LastSync   time.Time           `json:"last_sync"`
-	LastResult *syncResult         `json:"last_result"`
-	MediaIDs   []string            `json:"media_ids"`
+	LastSync   time.Time   `json:"last_sync"`
+	LastResult *syncResult `json:"last_result"`
+	MediaIDs   []string    `json:"media_ids"`
 }
 
 func loadPersistedState(path string) *persistedState {
@@ -111,11 +111,18 @@ func (s *runtimeServer) doSync(ctx context.Context, force bool) (*syncResult, er
 	var keepIDs []string
 	seenTitles := map[string]bool{} // tmdbID:mediaType dedup across lists
 
-	for _, listID := range cfg.PMDBListIDs {
+	for _, entry := range cfg.PMDBLists {
 		stat := listStat{}
+		// Public list URLs are resolved to IDs on every sync; raw IDs
+		// (your own lists) pass through untouched.
+		listID, label, err := resolveListEntry(entry)
+		if err != nil {
+			res.Errors = append(res.Errors, fmt.Sprintf("list %q: %v", entry, redactSecrets(err.Error())))
+			continue
+		}
 		items, err := pmdb.listItems(listID)
 		if err != nil {
-			res.Errors = append(res.Errors, fmt.Sprintf("list %s: %v", listID, redactSecrets(err.Error())))
+			res.Errors = append(res.Errors, fmt.Sprintf("list %s: %v", label, redactSecrets(err.Error())))
 			continue
 		}
 		stat.Items = len(items)
@@ -151,13 +158,13 @@ func (s *runtimeServer) doSync(ctx context.Context, force bool) (*syncResult, er
 			}
 			time.Sleep(100 * time.Millisecond)
 		}
-		res.Lists[listID] = stat
+		res.Lists[label] = stat
 		res.Registered += stat.Registered
 	}
 
 	// Reconcile only on a fully clean run: a failed list fetch or title
 	// lookup must never look like "the user deleted everything".
-	if len(res.Errors) == 0 && len(cfg.PMDBListIDs) > 0 {
+	if len(res.Errors) == 0 && len(cfg.PMDBLists) > 0 {
 		libIDs := []string{}
 		if cfg.MovieLibraryID > 0 {
 			libIDs = append(libIDs, strconv.Itoa(cfg.MovieLibraryID))

@@ -31,8 +31,10 @@ const configKey = "sync"
 const taskKey = "sync-pmdb-lists"
 
 type pluginConfig struct {
-	PMDBAPIKey          string
-	PMDBListIDs         []string
+	PMDBAPIKey string
+	// Each entry is either a raw PMDB list ID (your own lists) or a full
+	// public list URL, e.g. https://publicmetadb.com/lists/u/snoak/trending-kids-movies
+	PMDBLists           []string
 	TMDBAPIKey          string
 	MovieLibraryID      int
 	SeriesLibraryID     int
@@ -44,8 +46,8 @@ func (c pluginConfig) validate() error {
 	if strings.TrimSpace(c.PMDBAPIKey) == "" {
 		return fmt.Errorf("PublicMetaDB API key is not configured")
 	}
-	if len(c.PMDBListIDs) == 0 {
-		return fmt.Errorf("no PublicMetaDB list IDs configured")
+	if len(c.PMDBLists) == 0 {
+		return fmt.Errorf("no PublicMetaDB lists configured")
 	}
 	if strings.TrimSpace(c.TMDBAPIKey) == "" {
 		return fmt.Errorf("TMDB API key is not configured")
@@ -82,7 +84,12 @@ func (s *runtimeServer) Configure(_ context.Context, request *pb.ConfigureReques
 		values := entry.GetValue().AsMap()
 		cfg.PMDBAPIKey = strings.TrimSpace(strVal(values["pmdb_api_key"]))
 		cfg.TMDBAPIKey = strings.TrimSpace(strVal(values["tmdb_api_key"]))
-		cfg.PMDBListIDs = parseListIDs(values["pmdb_list_ids"])
+		// New key accepts list IDs or public list URLs; fall back to the
+		// legacy IDs-only key so existing configs keep working.
+		cfg.PMDBLists = parseListIDs(values["pmdb_lists"])
+		if len(cfg.PMDBLists) == 0 {
+			cfg.PMDBLists = parseListIDs(values["pmdb_list_ids"])
+		}
 		cfg.MovieLibraryID, _ = intVal(values["movie_library_id"])
 		cfg.SeriesLibraryID, _ = intVal(values["series_library_id"])
 		if n, ok := intVal(values["sync_interval_minutes"]); ok && n >= 15 {
@@ -166,13 +173,13 @@ func (s *runtimeServer) statusJSON() *pb.HandleHTTPResponse {
 	defer s.mu.Unlock()
 	cfg := s.cfg
 	out := map[string]any{
-		"configured_lists":    len(cfg.PMDBListIDs),
-		"list_ids":            cfg.PMDBListIDs,
-		"movie_library_id":    cfg.MovieLibraryID,
-		"series_library_id":   cfg.SeriesLibraryID,
+		"configured_lists":      len(cfg.PMDBLists),
+		"lists":                 cfg.PMDBLists,
+		"movie_library_id":      cfg.MovieLibraryID,
+		"series_library_id":     cfg.SeriesLibraryID,
 		"sync_interval_minutes": cfg.SyncIntervalMinutes,
-		"last_sync":           nil,
-		"last_result":         nil,
+		"last_sync":             nil,
+		"last_result":           nil,
 	}
 	if !s.lastSync.IsZero() {
 		out["last_sync"] = s.lastSync.Format(time.RFC3339)

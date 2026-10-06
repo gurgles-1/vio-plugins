@@ -1,1 +1,64 @@
-{"plugins":[{"artifacts":[{"arch":"amd64","os":"linux","sha256":"bbb1deeb9d25c98b22b1379d20eae768a9155d4d9b4c05776baa48fbb04ceb23","url":"https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.1.0/vio-pmdb-lists-linux-amd64"},{"arch":"arm64","os":"linux","sha256":"debb2b39e46a2b4dfaf3bfd07825c628a4620636253b28eedc035b9260703c9f","url":"https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.1.0/vio-pmdb-lists-linux-arm64"}],"description":"Syncs PublicMetaDB lists into Vio as zero-storage virtual movies and series with full episode metadata. Playback is delegated to Vio's virtual stream provider (Vio Virtual Library + AIOStreams).","id":"com.gurgles-1.vio-pmdb-lists","name":"PMDB Lists (Vio)","version":"0.1.0"},{"artifacts":[{"arch":"amd64","os":"linux","sha256":"c8f75e7c6c190e660f8e6cda3ff5f8f6be3158ee4a26c96df2996478ae5e5fab","url":"https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/silo-pmdb-lists/v0.1.0/silo-pmdb-lists-linux-amd64"},{"arch":"arm64","os":"linux","sha256":"8229e923b312b0d700b5acbcd9168097dc98d2f040670658b0e2a2d466d36f16","url":"https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/silo-pmdb-lists/v0.1.0/silo-pmdb-lists-linux-arm64"}],"description":"Browsable pages for PublicMetaDB lists inside Silo, with TMDB posters and badges showing which titles are already in your Silo libraries. Silo's plugin API cannot add library items, so this is a discovery view; the companion Vio plugin turns the same lists into playable libraries.","id":"com.gurgles-1.silo-pmdb-lists","name":"PMDB Lists (Silo)","version":"0.1.0"}]}
+{
+  "plugins": [
+    {
+      "artifacts": [
+        {
+          "arch": "amd64",
+          "os": "linux",
+          "sha256": "2223fde3787bd8bc30721a943647198b78048faae74663355eb89c3143802023",
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.0/vio-pmdb-lists-linux-amd64"
+        },
+        {
+          "arch": "arm64",
+          "os": "linux",
+          "sha256": "39f18b7b19f951482bd038757b8fcc18a78d98f478145845ecaf89b140d39052",
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.0/vio-pmdb-lists-linux-arm64"
+        }
+      ],
+      "description": "Syncs PublicMetaDB lists into Vio as zero-storage virtual movies and series with full episode metadata. Accepts your own list IDs or anyone\u2019s public list URLs \u2014 public lists are read directly, no copy needed. Playback is delegated to Vio\u2019s virtual stream provider (Vio Virtual Library + AIOStreams).",
+      "id": "com.gurgles-1.vio-pmdb-lists",
+      "name": "PMDB Lists (Vio)",
+      "version": "0.2.0"
+    },
+    {
+      "artifacts": [
+        {
+          "arch": "amd64",
+          "os": "linux",
+          "sha256": "c8f75e7c6c190e660f8e6cda3ff5f8f6be3158ee4a26c96df2996478ae5e5fab",
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/silo-pmdb-lists/v0.1.0/silo-pmdb-lists-linux-amd64"
+        },
+        {
+          "arch": "arm64",
+          "os": "linux",
+          "sha256": "8229e923b312b0d700b5acbcd9168097dc98d2f040670658b0e2a2d466d36f16",
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/silo-pmdb-lists/v0.1.0/silo-pmdb-lists-linux-arm64"
+        }
+      ],
+      "description": "Browsable pages for PublicMetaDB lists inside Silo, with TMDB posters and badges showing which titles are already in your Silo libraries. Silo's plugin API cannot add library items, so this is a discovery view; the companion Vio plugin turns the same lists into playable libraries.",
+      "id": "com.gurgles-1.silo-pmdb-lists",
+      "name": "PMDB Lists (Silo)",
+      "version": "0.1.0"
+    },
+    {
+      "id": "com.gurgles-1.vio-aiostreams-watchsync",
+      "name": "AIOStreams Watch Sync",
+      "version": "0.1.0",
+      "description": "Bidirectional watch-state sync between AIOStreams and Vio: AIOStreams pushes playback/watchlist events to the plugin's handoff sink and pulls Vio's watch state back, while Vio imports/exports through the watch-sync provider API.",
+      "artifacts": [
+        {
+          "os": "linux",
+          "arch": "amd64",
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-aiostreams-watchsync/v0.1.0/vio-aiostreams-watchsync-linux-amd64",
+          "sha256": "0ac45fac8b0824fba6cd4b879bc479947242deb49cfc06b709c8135a1d77fa20"
+        },
+        {
+          "os": "linux",
+          "arch": "arm64",
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-aiostreams-watchsync/v0.1.0/vio-aiostreams-watchsync-linux-arm64",
+          "sha256": "61d94b6a6174f28b6d039d7a811e4e081f51c43f05191db97d0c7fd0226ec4bc"
+        }
+      ]
+    }
+  ]
+}
