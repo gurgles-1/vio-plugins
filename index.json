@@ -496,7 +496,7 @@
     {
       "manifest": {
         "plugin_id": "com.gurgles-1.vio-cover-studio",
-        "version": "0.1.0",
+        "version": "0.1.1",
         "silo_api_version": "v1",
         "supported_platforms": [
           {
@@ -527,7 +527,7 @@
             "key": "covers",
             "title": "Cover Studio",
             "description": "Which collections get generated covers and how they look.",
-            "json_schema": "{\"type\":\"object\",\"properties\":{\"vio_url\":{\"type\":\"string\",\"default\":\"http://127.0.0.1:8080\"},\"vio_api_key\":{\"type\":\"string\"},\"tmdb_api_key\":{\"type\":\"string\"},\"collections\":{\"type\":\"string\"},\"overlay_mode\":{\"type\":\"string\",\"enum\":[\"logo\",\"text\",\"none\"],\"default\":\"logo\"},\"layout\":{\"type\":\"string\",\"enum\":[\"grid\",\"spotlight\",\"columns\"],\"default\":\"grid\"},\"refresh_hours\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":168,\"default\":24}},\"required\":[\"vio_api_key\",\"tmdb_api_key\"],\"additionalProperties\":false}",
+            "json_schema": "{\"type\": \"object\", \"properties\": {\"vio_url\": {\"type\": \"string\", \"default\": \"http://127.0.0.1:8080\"}, \"vio_api_key\": {\"type\": \"string\"}, \"tmdb_api_key\": {\"type\": \"string\"}, \"collections\": {\"type\": \"string\"}, \"overlay_mode\": {\"type\": \"string\", \"enum\": [\"logo\", \"text\", \"none\", \"\"], \"default\": \"logo\"}, \"layout\": {\"type\": \"string\", \"enum\": [\"grid\", \"spotlight\", \"columns\", \"\"], \"default\": \"grid\"}, \"refresh_hours\": {\"type\": \"integer\", \"minimum\": 1, \"maximum\": 168, \"default\": 24}}, \"required\": [\"vio_api_key\", \"tmdb_api_key\"], \"additionalProperties\": false}",
             "required": true,
             "admin_form": {
               "fields": [
@@ -644,17 +644,17 @@
           "license_spdx": "MIT"
         }
       },
+      "repo_url": "https://github.com/gurgles-1/vio-plugins",
       "binaries": {
         "linux/amd64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-cover-studio/v0.1.0/vio-cover-studio-linux-amd64",
-          "checksum": "9de13a5bb02537ca5ebcd790e23d412c3477e0ef743c56c2c936e90a97cb5e87"
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-cover-studio/v0.1.1/vio-cover-studio-linux-amd64",
+          "checksum": "bda1342133759cbe773dfd9ac70e588036b9865d33f1ce72b696b34ae741d681"
         },
         "linux/arm64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-cover-studio/v0.1.0/vio-cover-studio-linux-arm64",
-          "checksum": "05a275e363ecd67590e93199689b9e92b9f64ab81414bde600bef253e1941fd5"
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-cover-studio/v0.1.1/vio-cover-studio-linux-arm64",
+          "checksum": "d2a2a7f75329f218e42e29652c9ab8221425a391526d3edcd5dfac5bba7d3871"
         }
-      },
-      "repo_url": "https://github.com/gurgles-1/vio-plugins"
+      }
     }
   ]
 }

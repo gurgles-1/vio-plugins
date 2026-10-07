@@ -29,15 +29,22 @@ type repositoryIndex struct {
 func main() {
 	repoRoot := os.Args[1]
 	plugins := [][2]string{
-		{"vio-pmdb-lists", "0.2.2"},
+		{"vio-pmdb-lists", "0.3.0"},
 		{"silo-pmdb-lists", "0.1.0"},
 		{"vio-aiostreams-watchsync", "0.1.0"},
 		{"scrob-watchprovider", "0.1.3"},
+		{"kometa-artwork", "0.1.0"},
+		{"vio-cover-studio", "0.1.1"},
 	}
 	idx := repositoryIndex{}
 	for _, p := range plugins {
 		name, verdir := p[0], "v"+p[1]
-		m, err := manifest.LoadFromDisk(filepath.Join(repoRoot, "plugins", name, "manifest.json"))
+		manifestPath := filepath.Join(repoRoot, "plugins", name, "manifest.json")
+		if _, err := os.Stat(manifestPath); err != nil {
+			fmt.Fprintf(os.Stderr, "%s: no manifest.json, skipping\n", name)
+			continue
+		}
+		m, err := manifest.LoadFromDisk(manifestPath)
 		if err != nil {
 			panic(err)
 		}
