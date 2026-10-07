@@ -4,13 +4,13 @@ Evan's personal plugin collection for Vio (and Silo). Add the catalog once; ever
 
 ## Add to Vio
 
-In Vio, open **Admin → Plugins → Catalog**, add this custom repository URL:
+In Vio, open **Admin → Plugins → Repositories**, click **Add repository**, and enter:
 
-```
-https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/catalog.json
-```
+- Name: `gurgles-1/vio-plugins` (anything you like)
+- Repository URL: `https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/index.json`
 
-Both plugins below will be listed and installable from there.
+All plugins below will be listed and installable from there. (`catalog.json` is a
+legacy/human-readable listing; Vio reads `index.json`.)
 
 ## Plugins
 
@@ -18,6 +18,7 @@ Both plugins below will be listed and installable from there.
 |---|---|---|
 | PMDB Lists (Vio) | `com.gurgles-1.vio-pmdb-lists` | Syncs PublicMetaDB lists into Vio as zero-storage virtual movies and series (full episode metadata). Playback via Vio Virtual Library + AIOStreams. |
 | PMDB Lists (Silo) | `com.gurgles-1.silo-pmdb-lists` | Browsable PMDB list pages inside Silo with TMDB posters and "in library / missing" badges. Discovery view only — Silo's plugin API cannot inject library items. |
+| AIOStreams Watch Sync | `com.gurgles-1.vio-aiostreams-watchsync` | Bidirectional watch-state sync between AIOStreams and Vio via AIOStreams' handoff protocol (push sink + pull endpoint) and Vio's watch-sync provider API. |
 
 Each plugin keeps its source under `plugins/<name>/` and its released binaries under `dist/<name>/<version>/`.
 
