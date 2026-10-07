@@ -59,6 +59,9 @@ func TestBuildRegistrationMovie(t *testing.T) {
 	if req.LibraryID != "3" || req.SourceKey != syncSourceKey || req.TMDBID != "550" {
 		t.Fatalf("bad fields: %+v", req)
 	}
+	if req.MediaType != "movie" {
+		t.Fatalf("movie MediaType must be %q, got %q", "movie", req.MediaType)
+	}
 }
 
 func TestBuildRegistrationSeries(t *testing.T) {
@@ -79,6 +82,11 @@ func TestBuildRegistrationSeries(t *testing.T) {
 	}
 	if req.LibraryID != "4" {
 		t.Fatalf("bad library: %s", req.LibraryID)
+	}
+	// The host's UpsertVirtualMedia only accepts "movie"/"series" —
+	// "tv" is rejected client-side.
+	if req.MediaType != "series" {
+		t.Fatalf("series MediaType must be %q, got %q", "series", req.MediaType)
 	}
 	// A series with no episodes must be rejected, not registered empty.
 	_, err = buildRegistration(cfg, &tmdbTitle{TMDBID: 1, MediaType: "tv", IMDbID: "tt1", Title: "X"}, "3", "4")

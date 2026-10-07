@@ -267,8 +267,15 @@ func buildRegistration(cfg pluginConfig, t *tmdbTitle, movieLibID, seriesLibID s
 	if strings.TrimSpace(t.Title) == "" {
 		return nil, fmt.Errorf("title is required")
 	}
+	// The host's UpsertVirtualMedia only accepts "movie"/"series"; TMDB/PMDB
+	// use "movie"/"tv", so map here.
+	hostMediaType := "series"
+	isMovie := t.MediaType == "movie"
+	if isMovie {
+		hostMediaType = "movie"
+	}
 	req := &runtimehost.VirtualMediaRequest{
-		MediaType:      t.MediaType,
+		MediaType:      hostMediaType,
 		Title:          t.Title,
 		Year:           t.Year,
 		IMDbID:         t.IMDbID,
@@ -280,7 +287,7 @@ func buildRegistration(cfg pluginConfig, t *tmdbTitle, movieLibID, seriesLibID s
 		RuntimeMinutes: t.Runtime,
 		SourceKey:      syncSourceKey,
 	}
-	if t.MediaType == "movie" {
+	if isMovie {
 		if movieLibID == "" {
 			return nil, fmt.Errorf("no Movies library configured; name one in the plugin settings")
 		}

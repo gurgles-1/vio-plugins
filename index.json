@@ -3,17 +3,17 @@
     {
       "binaries": {
         "linux/amd64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.3/vio-pmdb-lists-linux-amd64",
-          "checksum": "5c0ac460057bc03a51b5e336a1c7f29159dc2f59d7d2b7aedbf3c3db8bb6eb26"
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.4/vio-pmdb-lists-linux-amd64",
+          "checksum": "97334fcd75d97b1669cbdc6c590e7e33cba5da366c8d161e87d516f21b7185fc"
         },
         "linux/arm64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.3/vio-pmdb-lists-linux-arm64",
-          "checksum": "582ce456f0b882822f966c4494733d5de5c49c56e84d4a9d32eb37ed1a7d27b8"
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.4/vio-pmdb-lists-linux-arm64",
+          "checksum": "18cb1afd83e94ffcb4be236da71e21b356e3f73fcd753619a9401429e27d5ea5"
         }
       },
       "manifest": {
         "plugin_id": "com.gurgles-1.vio-pmdb-lists",
-        "version": "0.2.3",
+        "version": "0.2.4",
         "silo_api_version": "v1",
         "supported_platforms": [
           {
