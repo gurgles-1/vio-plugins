@@ -32,13 +32,14 @@ select{background:#0b0e14;color:#e5e9f0;border:1px solid #2a3346;border-radius:4
 <script>
 const $=id=>document.getElementById(id);
 let state=null;
+const basePath=window.location.pathname.replace(/\/$/,'');
 const overlays=[['logo','Logo'],['text','Text'],['none','None']];
 const layouts=[['grid','Grid 3×2'],['spotlight','Spotlight'],['columns','Columns']];
 function sel(name,val,opts){return '<select data-k="'+name+'">'+opts.map(o=>'<option value="'+o[0]+'"'+(o[0]===val?' selected':'')+'>'+o[1]+'</option>').join('')+'</select>'}
 async function load(){
   try{
     const ctl=new AbortController();const to=setTimeout(()=>ctl.abort(),30000);
-    const r=await fetch('/admin/cover-studio/status',{signal:ctl.signal});clearTimeout(to);
+    const r=await fetch(basePath+'/status',{signal:ctl.signal});clearTimeout(to);
     if(!r.ok)throw new Error('status '+r.status);
     state=await r.json();
   }catch(e){$('msg').textContent='error: cannot reach plugin ('+(e.name==='AbortError'?'timeout':e.message)+') — is it running?';$('msg').className='bad';return}
@@ -72,12 +73,12 @@ async function rowAction(btn){
         enabled:tr.querySelector('[data-k=enabled]').checked,
         overlay_mode:tr.querySelector('[data-k=overlay]').value,
         layout:tr.querySelector('[data-k=layout]').value};
-      const r=await fetch('/admin/cover-studio/options',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+      const r=await fetch(basePath+'/options',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
       const j=await r.json();
       $('msg').textContent=j.error?('error: '+j.error):'saved';$('msg').className=j.error?'bad':'ok';
     }else{
       $('msg').textContent='rebuilding '+id+'…';$('msg').className='dim';
-      const r=await fetch('/admin/cover-studio/rebuild?collection_id='+encodeURIComponent(id),{method:'POST'});
+      const r=await fetch(basePath+'/rebuild?collection_id='+encodeURIComponent(id),{method:'POST'});
       const j=await r.json();
       $('msg').textContent=j.error?('error: '+j.error):('rebuilt: poster '+(j.poster_ok?'ok':'failed')+', backdrop '+(j.backdrop_ok?'ok':'skipped'));
       $('msg').className=j.error?'bad':'ok';
@@ -88,8 +89,8 @@ async function rowAction(btn){
 $('pvbtn').onclick=async()=>{
   const id=$('pvsel').value;if(!id)return;
   $('pv').innerHTML='<span class="dim">rendering…</span>';
-  $('pv').innerHTML='<figure><img src="/admin/cover-studio/preview?collection_id='+encodeURIComponent(id)+'&kind=portrait"><figcaption>portrait 1000×1500</figcaption></figure>'
-    +'<figure><img src="/admin/cover-studio/preview?collection_id='+encodeURIComponent(id)+'&kind=landscape"><figcaption>landscape 1920×1080</figcaption></figure>';
+  $('pv').innerHTML='<figure><img src=""+basePath+"/preview?collection_id='+encodeURIComponent(id)+'&kind=portrait"><figcaption>portrait 1000×1500</figcaption></figure>'
+    +'<figure><img src=""+basePath+"/preview?collection_id='+encodeURIComponent(id)+'&kind=landscape"><figcaption>landscape 1920×1080</figcaption></figure>';
 };
 load();
 </script></body></html>`

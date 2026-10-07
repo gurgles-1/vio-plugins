@@ -496,7 +496,7 @@
     {
       "manifest": {
         "plugin_id": "com.gurgles-1.vio-cover-studio",
-        "version": "0.1.2",
+        "version": "0.1.3",
         "silo_api_version": "v1",
         "supported_platforms": [
           {
@@ -647,12 +647,12 @@
       "repo_url": "https://github.com/gurgles-1/vio-plugins",
       "binaries": {
         "linux/amd64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-cover-studio/v0.1.2/vio-cover-studio-linux-amd64",
-          "checksum": "1b9c9902aab045fefa94ca16f70e0334a687fd9afb7e533872986a81956dd364"
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-cover-studio/v0.1.3/vio-cover-studio-linux-amd64",
+          "checksum": "4dcc74239208d55beea36fdff87d6f92c871e79677ac976155ef7c22b7d7401e"
         },
         "linux/arm64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-cover-studio/v0.1.2/vio-cover-studio-linux-arm64",
-          "checksum": "aa9ac5fe14235b8a3cecf8a2326dd6fdc2b655984742b6daf3259a41b2a71797"
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-cover-studio/v0.1.3/vio-cover-studio-linux-arm64",
+          "checksum": "c7cf7bc0bc562f71d4a194c6a08ba63c45ac978d4009d6058f57e333719f4795"
         }
       }
     }
