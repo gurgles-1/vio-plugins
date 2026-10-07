@@ -3,17 +3,17 @@
     {
       "binaries": {
         "linux/amd64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.4/vio-pmdb-lists-linux-amd64",
-          "checksum": "97334fcd75d97b1669cbdc6c590e7e33cba5da366c8d161e87d516f21b7185fc"
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.3.0/vio-pmdb-lists-linux-amd64",
+          "checksum": "c5e0733c05af91f020ea5870a71acb794dca731d096f92b7ee6e392115ba1462"
         },
         "linux/arm64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.4/vio-pmdb-lists-linux-arm64",
-          "checksum": "18cb1afd83e94ffcb4be236da71e21b356e3f73fcd753619a9401429e27d5ea5"
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.3.0/vio-pmdb-lists-linux-arm64",
+          "checksum": "6f2321cfe869657b65f937f6514e37257e5ac04e7d5d865e054ebacfdc7e6bbf"
         }
       },
       "manifest": {
         "plugin_id": "com.gurgles-1.vio-pmdb-lists",
-        "version": "0.2.4",
+        "version": "0.3.0",
         "silo_api_version": "v1",
         "supported_platforms": [
           {
@@ -76,14 +76,14 @@
                 {
                   "key": "movie_library",
                   "label": "Movies Library",
-                  "description": "Vio Movies library name (e.g. Movies). Leave blank to auto-detect the first Movies-type library.",
+                  "description": "Movies library name (e.g. Movies). Leave blank to auto-detect the first Movies-type library.",
                   "control": 1,
                   "placeholder": "Movies"
                 },
                 {
                   "key": "series_library",
                   "label": "Series Library",
-                  "description": "Vio Series library name (e.g. TV). Leave blank to auto-detect the first Series-type library.",
+                  "description": "Series library name (e.g. TV). Leave blank to auto-detect the first Series-type library.",
                   "control": 1,
                   "placeholder": "TV"
                 },
@@ -124,9 +124,9 @@
           }
         ],
         "presentation": {
-          "display_name": "PMDB Lists (Vio)",
+          "display_name": "PMDB Lists",
           "summary": "Import PublicMetaDB lists as virtual media libraries.",
-          "description_markdown": "Reads your PublicMetaDB lists \u2014 or anyone's *public* lists, pasted as full URLs \u2014 on a schedule and registers every title as zero-storage virtual media in your Movies and Series virtual libraries. Items removed from a list are removed from Vio on the next clean sync. Playback is handled by your configured virtual stream provider (e.g. Vio Virtual Library with AIOStreams).",
+          "description_markdown": "Reads your PublicMetaDB lists \u2014 or anyone's *public* lists, pasted as full URLs \u2014 on a schedule and registers every title as zero-storage virtual media in your Movies and Series virtual libraries. Items removed from a list are removed from your server on the next clean sync. Playback is handled by your configured virtual stream provider (e.g. a virtual library provider backed by AIOStreams).",
           "setup_markdown": "Enter your PublicMetaDB API key and one list per line \u2014 a list ID for your own lists, or a full public list URL like https://publicmetadb.com/lists/u/snoak/trending-kids-movies (public lists are read directly, no copy needed). Add a TMDB API key for metadata and IMDb resolution, then name your destination Movies and Series libraries (leave blank to auto-detect them). Press Sync Now on the PMDB Lists admin page to run the first import.",
           "homepage_url": "https://github.com/gurgles-1/vio-pmdb-lists",
           "source_url": "https://github.com/gurgles-1/vio-pmdb-lists",

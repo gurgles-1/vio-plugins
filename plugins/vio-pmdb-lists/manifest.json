@@ -46,7 +46,7 @@
           },
           {
             "control": "ADMIN_FORM_CONTROL_TEXT",
-            "description": "Vio Movies library name (e.g. Movies). Leave blank to auto-detect the first Movies-type library.",
+            "description": "Movies library name (e.g. Movies). Leave blank to auto-detect the first Movies-type library.",
             "key": "movie_library",
             "label": "Movies Library",
             "placeholder": "Movies",
@@ -54,7 +54,7 @@
           },
           {
             "control": "ADMIN_FORM_CONTROL_TEXT",
-            "description": "Vio Series library name (e.g. TV). Leave blank to auto-detect the first Series-type library.",
+            "description": "Series library name (e.g. TV). Leave blank to auto-detect the first Series-type library.",
             "key": "series_library",
             "label": "Series Library",
             "placeholder": "TV",
@@ -103,8 +103,8 @@
   ],
   "plugin_id": "com.gurgles-1.vio-pmdb-lists",
   "presentation": {
-    "description_markdown": "Reads your PublicMetaDB lists — or anyone's *public* lists, pasted as full URLs — on a schedule and registers every title as zero-storage virtual media in your Movies and Series virtual libraries. Items removed from a list are removed from Vio on the next clean sync. Playback is handled by your configured virtual stream provider (e.g. Vio Virtual Library with AIOStreams).",
-    "display_name": "PMDB Lists (Vio)",
+    "description_markdown": "Reads your PublicMetaDB lists — or anyone's *public* lists, pasted as full URLs — on a schedule and registers every title as zero-storage virtual media in your Movies and Series virtual libraries. Items removed from a list are removed from your server on the next clean sync. Playback is handled by your configured virtual stream provider (e.g. a virtual library provider backed by AIOStreams).",
+    "display_name": "PMDB Lists",
     "homepage_url": "https://github.com/gurgles-1/vio-pmdb-lists",
     "license_spdx": "MIT",
     "publisher_name": "gurgles-1",
@@ -125,5 +125,5 @@
       "os": "linux"
     }
   ],
-  "version": "0.2.4"
+  "version": "0.3.0"
 }
