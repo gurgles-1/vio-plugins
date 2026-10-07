@@ -1,1 +1,113 @@
-{"capabilities":[{"description":"Sync status, manual sync trigger, and the browsable PMDB list pages.","display_name":"PMDB Lists Admin","id":"lists","type":"http_routes.v1"},{"description":"Fetches the configured PublicMetaDB lists, resolves titles through TMDB, and caches them for the browser pages.","display_name":"Sync PMDB Lists","id":"sync-pmdb-lists","type":"scheduled_task.v1"}],"global_config_schema":[{"admin_form":{"fields":[{"control":"ADMIN_FORM_CONTROL_PASSWORD","description":"Your PublicMetaDB API key (publicmetadb.com → account settings). Used to read your lists.","key":"pmdb_api_key","label":"PublicMetaDB API Key","placeholder":"pmdb_…","required":true,"secret":true},{"control":"ADMIN_FORM_CONTROL_TEXTAREA","description":"One PublicMetaDB list ID per line (the ID in the list URL, e.g. pvg2vr8nuvkh2g5).","key":"pmdb_list_ids","label":"PMDB List IDs","placeholder":"pvg2vr8nuvkh2g5\nhddzdnbivm49u1r","required":true,"rows":4},{"control":"ADMIN_FORM_CONTROL_PASSWORD","description":"TMDB API key (v3) or read access token (v4). Used for posters, metadata, and TMDB → IMDb resolution.","key":"tmdb_api_key","label":"TMDB API Key","placeholder":"eyJhbG… or v3 api key","required":true,"secret":true},{"control":"ADMIN_FORM_CONTROL_NUMBER","description":"Minimum time between automatic syncs. The scheduled task skips runs inside this window; the admin page can always force a sync.","key":"sync_interval_minutes","label":"Sync Interval (minutes)","placeholder":"720"},{"control":"ADMIN_FORM_CONTROL_TEXT","description":"Where the plugin keeps its synced list cache. Defaults inside the plugin data directory.","key":"state_file","label":"Cache File","placeholder":".silo-pmdb-lists-cache.json"}],"submit_label":"Save PMDB lists"},"description":"Which PublicMetaDB lists to browse and how often to refresh them.","json_schema":"{\"type\":\"object\",\"properties\":{\"pmdb_api_key\":{\"type\":\"string\"},\"pmdb_list_ids\":{\"type\":\"string\"},\"tmdb_api_key\":{\"type\":\"string\"},\"sync_interval_minutes\":{\"type\":\"integer\",\"minimum\":15,\"maximum\":10080,\"default\":720},\"state_file\":{\"type\":\"string\",\"default\":\".silo-pmdb-lists-cache.json\"}},\"required\":[\"pmdb_api_key\",\"pmdb_list_ids\",\"tmdb_api_key\"],\"additionalProperties\":false}","key":"sync","required":true,"title":"PMDB lists"}],"http_routes":[{"access":"admin","id":"lists","method":"GET","navigable":true,"navigation_kind":"admin","navigation_label":"PMDB Lists","path":"/pmdb-lists"},{"access":"admin","id":"lists-api","method":"*","path":"/pmdb-lists/*"}],"plugin_id":"com.gurgles-1.silo-pmdb-lists","presentation":{"description_markdown":"Browsable pages for your PublicMetaDB lists inside Silo. A scheduled task keeps the lists cached with TMDB posters and metadata, and each title is badged with whether it is already in your Silo libraries — handy for spotting what's on the list but missing from the library. (Silo's plugin API cannot add library items, so this is a discovery view; the companion Vio plugin turns the same lists into playable virtual libraries.)","display_name":"PMDB Lists","homepage_url":"https://github.com/gurgles-1/silo-pmdb-lists","license_spdx":"MIT","publisher_name":"gurgles-1","publisher_url":"https://github.com/gurgles-1","setup_markdown":"Enter your PublicMetaDB API key and one list ID per line, add a TMDB API key for posters and metadata, then press Sync Now on the PMDB Lists page to run the first import.","source_url":"https://github.com/gurgles-1/silo-pmdb-lists","summary":"Browse PublicMetaDB lists inside Silo.","support_url":"https://github.com/gurgles-1/silo-pmdb-lists/issues"},"silo_api_version":"v1","supported_platforms":[{"arch":"amd64","os":"linux"},{"arch":"arm64","os":"linux"}],"version":"0.1.0"}
+{
+  "capabilities": [
+    {
+      "description": "Sync status, manual sync trigger, and the browsable PMDB list pages.",
+      "display_name": "PMDB Lists Admin",
+      "id": "lists",
+      "type": "http_routes.v1"
+    },
+    {
+      "description": "Fetches the configured PublicMetaDB lists, resolves titles through TMDB, and caches them for the browser pages.",
+      "display_name": "Sync PMDB Lists",
+      "id": "sync-pmdb-lists",
+      "type": "scheduled_task.v1"
+    }
+  ],
+  "global_config_schema": [
+    {
+      "admin_form": {
+        "fields": [
+          {
+            "control": "ADMIN_FORM_CONTROL_PASSWORD",
+            "description": "Your PublicMetaDB API key (publicmetadb.com \u2192 account settings). Used to read your lists.",
+            "key": "pmdb_api_key",
+            "label": "PublicMetaDB API Key",
+            "placeholder": "pmdb_\u2026",
+            "required": true,
+            "secret": true
+          },
+          {
+            "control": "ADMIN_FORM_CONTROL_TEXTAREA",
+            "description": "One PublicMetaDB list ID per line (the ID in the list URL, e.g. pvg2vr8nuvkh2g5).",
+            "key": "pmdb_list_ids",
+            "label": "PMDB List IDs",
+            "placeholder": "pvg2vr8nuvkh2g5\nhddzdnbivm49u1r",
+            "required": true,
+            "rows": 4
+          },
+          {
+            "control": "ADMIN_FORM_CONTROL_PASSWORD",
+            "description": "TMDB API key (v3) or read access token (v4). Used for posters, metadata, and TMDB \u2192 IMDb resolution.",
+            "key": "tmdb_api_key",
+            "label": "TMDB API Key",
+            "placeholder": "eyJhbG\u2026 or v3 api key",
+            "required": true,
+            "secret": true
+          },
+          {
+            "control": "ADMIN_FORM_CONTROL_NUMBER",
+            "description": "Minimum time between automatic syncs. The scheduled task skips runs inside this window; the admin page can always force a sync.",
+            "key": "sync_interval_minutes",
+            "label": "Sync Interval (minutes)",
+            "placeholder": "720"
+          },
+          {
+            "control": "ADMIN_FORM_CONTROL_TEXT",
+            "description": "Where the plugin keeps its synced list cache. Defaults inside the plugin data directory.",
+            "key": "state_file",
+            "label": "Cache File",
+            "placeholder": ".silo-pmdb-lists-cache.json"
+          }
+        ],
+        "submit_label": "Save PMDB lists"
+      },
+      "description": "Which PublicMetaDB lists to browse and how often to refresh them.",
+      "json_schema": "{\"type\":\"object\",\"properties\":{\"pmdb_api_key\":{\"type\":\"string\"},\"pmdb_list_ids\":{\"type\":\"string\"},\"tmdb_api_key\":{\"type\":\"string\"},\"sync_interval_minutes\":{\"type\":\"integer\",\"minimum\":15,\"maximum\":10080,\"default\":720},\"state_file\":{\"type\":\"string\",\"default\":\".silo-pmdb-lists-cache.json\"}},\"required\":[\"pmdb_api_key\",\"pmdb_list_ids\",\"tmdb_api_key\"],\"additionalProperties\":false}",
+      "key": "sync",
+      "required": true,
+      "title": "PMDB lists"
+    }
+  ],
+  "http_routes": [
+    {
+      "access": "admin",
+      "id": "lists",
+      "method": "GET",
+      "navigable": true,
+      "navigation_kind": "admin",
+      "navigation_label": "PMDB Lists",
+      "path": "/pmdb-lists"
+    },
+    {
+      "access": "admin",
+      "id": "lists-api",
+      "method": "*",
+      "path": "/pmdb-lists/*"
+    }
+  ],
+  "plugin_id": "com.gurgles-1.silo-pmdb-lists",
+  "presentation": {
+    "description_markdown": "Browsable pages for your PublicMetaDB lists inside Silo. A scheduled task keeps the lists cached with TMDB posters and metadata, and each title is badged with whether it is already in your Silo libraries \u2014 handy for spotting what's on the list but missing from the library. (Silo's plugin API cannot add library items, so this is a discovery view; the companion Vio plugin turns the same lists into playable virtual libraries.)",
+    "display_name": "PMDB Lists (Silo)",
+    "homepage_url": "https://github.com/gurgles-1/silo-pmdb-lists",
+    "license_spdx": "MIT",
+    "publisher_name": "gurgles-1",
+    "publisher_url": "https://github.com/gurgles-1",
+    "setup_markdown": "Enter your PublicMetaDB API key and one list ID per line, add a TMDB API key for posters and metadata, then press Sync Now on the PMDB Lists page to run the first import.",
+    "source_url": "https://github.com/gurgles-1/silo-pmdb-lists",
+    "summary": "Browse PublicMetaDB lists inside Silo.",
+    "support_url": "https://github.com/gurgles-1/silo-pmdb-lists/issues"
+  },
+  "silo_api_version": "v1",
+  "supported_platforms": [
+    {
+      "arch": "amd64",
+      "os": "linux"
+    },
+    {
+      "arch": "arm64",
+      "os": "linux"
+    }
+  ],
+  "version": "0.1.0"
+}
