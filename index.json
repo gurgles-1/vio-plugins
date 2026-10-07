@@ -1,16 +1,6 @@
 {
   "plugins": [
     {
-      "binaries": {
-        "linux/amd64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.3.0/vio-pmdb-lists-linux-amd64",
-          "checksum": "c5e0733c05af91f020ea5870a71acb794dca731d096f92b7ee6e392115ba1462"
-        },
-        "linux/arm64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.3.0/vio-pmdb-lists-linux-arm64",
-          "checksum": "6f2321cfe869657b65f937f6514e37257e5ac04e7d5d865e054ebacfdc7e6bbf"
-        }
-      },
       "manifest": {
         "plugin_id": "com.gurgles-1.vio-pmdb-lists",
         "version": "0.3.0",
@@ -134,6 +124,17 @@
           "publisher_name": "gurgles-1",
           "publisher_url": "https://github.com/gurgles-1",
           "license_spdx": "MIT"
+        }
+      },
+      "repo_url": "https://github.com/gurgles-1/vio-plugins",
+      "binaries": {
+        "linux/amd64": {
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.2/vio-pmdb-lists-linux-amd64",
+          "checksum": "53fbb7613f330423b9a3f7917f3b24af4f2377a65f92bdb5aba1ef40a93faec2"
+        },
+        "linux/arm64": {
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.2/vio-pmdb-lists-linux-arm64",
+          "checksum": "54674bd7e0e4c2659a6b1d3a87931ab08ba1192380174677dc7efdff490a1174"
         }
       }
     },
@@ -265,160 +266,6 @@
     },
     {
       "manifest": {
-        "plugin_id": "com.gurgles-1.vio-aiostreams-watchsync",
-        "version": "0.1.0",
-        "silo_api_version": "v1",
-        "supported_platforms": [
-          {
-            "os": "linux",
-            "arch": "amd64"
-          },
-          {
-            "os": "linux",
-            "arch": "arm64"
-          }
-        ],
-        "capabilities": [
-          {
-            "type": "watch_sync_provider.v1",
-            "id": "aiostreams-watchsync",
-            "display_name": "AIOStreams Watch Sync",
-            "description": "Bidirectional watch-state sync between AIOStreams and Vio: imports AIOStreams playback/watchlist state into Vio and exports Vio's watch state back to AIOStreams.",
-            "watch_sync_provider": {
-              "auth_methods": [
-                2
-              ],
-              "export_watched": true,
-              "export_unwatched": true,
-              "import_watched": true,
-              "import_progress": true,
-              "supported_media_types": [
-                1,
-                2
-              ],
-              "external_id_namespaces": [
-                "imdb",
-                "tmdb",
-                "tvdb"
-              ],
-              "max_batch_size": 100,
-              "import_watchlist": true,
-              "export_watchlist": true,
-              "scrobble_playback": true
-            }
-          },
-          {
-            "type": "http_routes.v1",
-            "id": "watch-state-bridge",
-            "display_name": "AIOStreams Handoff Bridge",
-            "description": "AIOStreams handoff sink: receives playback/watchlist/rating events pushed by AIOStreams and serves Vio's watch state back in AIOStreams' pull format."
-          },
-          {
-            "type": "http_routes.v1",
-            "id": "admin-routes",
-            "display_name": "Watch Sync Admin",
-            "description": "Sync status and bridge diagnostics for the AIOStreams watch-state bridge."
-          }
-        ],
-        "global_config_schema": [
-          {
-            "key": "watchsync",
-            "title": "AIOStreams watch sync",
-            "description": "Connection settings for the AIOStreams watch-state handoff bridge.",
-            "json_schema": "{\"type\":\"object\",\"properties\":{\"sink_token\":{\"type\":\"string\"},\"aiostreams_base_url\":{\"type\":\"string\"},\"state_file\":{\"type\":\"string\",\"default\":\".vio-aiostreams-watchsync-state.json\"}},\"required\":[\"sink_token\"],\"additionalProperties\":false}",
-            "required": true,
-            "admin_form": {
-              "fields": [
-                {
-                  "key": "sink_token",
-                  "label": "Sink Token",
-                  "description": "Shared secret appended as ?token= to the AIOStreams addon URL. AIOStreams forwards it on every push/pull request; the plugin rejects requests without it.",
-                  "control": 3,
-                  "placeholder": "a long random string",
-                  "required": true,
-                  "secret": true
-                },
-                {
-                  "key": "aiostreams_base_url",
-                  "label": "AIOStreams Base URL",
-                  "description": "AIOStreams base URL, e.g. http://192.168.68.64:3006. Shown on the admin page for convenience; the bridge itself is driven by AIOStreams calling the plugin.",
-                  "control": 1,
-                  "placeholder": "http://192.168.68.64:3006"
-                },
-                {
-                  "key": "state_file",
-                  "label": "State File",
-                  "description": "Where the plugin keeps its inbound/outbound event bridge state. Defaults inside the plugin data directory.",
-                  "control": 1,
-                  "placeholder": ".vio-aiostreams-watchsync-state.json"
-                }
-              ],
-              "submit_label": "Save watch sync settings"
-            }
-          }
-        ],
-        "http_routes": [
-          {
-            "id": "watch-state-manifest",
-            "method": "GET",
-            "path": "/watch_state/manifest.json",
-            "access": "public"
-          },
-          {
-            "id": "watch-state-push",
-            "method": "POST",
-            "path": "/watch_state/push/*",
-            "access": "public"
-          },
-          {
-            "id": "watch-state-pull",
-            "method": "GET",
-            "path": "/watch_state/pull.json",
-            "access": "public"
-          },
-          {
-            "id": "admin",
-            "method": "GET",
-            "path": "/admin/aiostreams-watchsync",
-            "access": "admin",
-            "navigable": true,
-            "navigation_label": "Watch Sync",
-            "navigation_kind": "admin"
-          },
-          {
-            "id": "admin-api",
-            "method": "*",
-            "path": "/admin/aiostreams-watchsync/*",
-            "access": "admin"
-          }
-        ],
-        "presentation": {
-          "display_name": "AIOStreams Watch Sync",
-          "summary": "Bidirectional watch-state sync between AIOStreams and Vio.",
-          "description_markdown": "Bridges AIOStreams' watch-state handoff protocol and Vio's watch-sync provider API for bidirectional sync. AIOStreams pushes playback, watchlist, and rating events to the plugin's sink endpoint; Vio imports them through the watch-sync provider's ListRemoteState. Vio's own watch events flow back out through ApplyEvents and are served to AIOStreams in its pull format, so Continue Watching stays consistent in both directions.",
-          "setup_markdown": "Set a sink token, then add the addon URL shown on the Watch Sync admin page to AIOStreams as a regular addon (it carries ?token=...). AIOStreams will push playback events to the plugin and pull Vio's watch state from it. Enable the provider in Vio's watch-sync settings to import AIOStreams state.",
-          "homepage_url": "https://github.com/gurgles-1/vio-plugins",
-          "source_url": "https://github.com/gurgles-1/vio-plugins",
-          "support_url": "https://github.com/gurgles-1/vio-plugins/issues",
-          "publisher_name": "gurgles-1",
-          "publisher_url": "https://github.com/gurgles-1",
-          "license_spdx": "MIT"
-        }
-      },
-      "repo_url": "https://github.com/gurgles-1/vio-plugins",
-      "binaries": {
-        "linux/amd64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-aiostreams-watchsync/v0.1.0/vio-aiostreams-watchsync-linux-amd64",
-          "checksum": "0ac45fac8b0824fba6cd4b879bc479947242deb49cfc06b709c8135a1d77fa20"
-        },
-        "linux/arm64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-aiostreams-watchsync/v0.1.0/vio-aiostreams-watchsync-linux-arm64",
-          "checksum": "61d94b6a6174f28b6d039d7a811e4e081f51c43f05191db97d0c7fd0226ec4bc"
-        }
-      }
-    },
-    {
-      "manifest": {
         "plugin_id": "silo.watchprovider.scrob",
         "version": "0.1.3",
         "checksum": "__CHECKSUM__",
@@ -512,6 +359,302 @@
           "checksum": "666c28aed2e8786f3f4699fef891401d9817577438f4e3d7ef7596d33d6701b5"
         }
       }
+    },
+    {
+      "manifest": {
+        "plugin_id": "com.gurgles-1.kometa-artwork",
+        "version": "0.1.0",
+        "silo_api_version": "v1",
+        "supported_platforms": [
+          {
+            "os": "linux",
+            "arch": "amd64"
+          },
+          {
+            "os": "linux",
+            "arch": "arm64"
+          }
+        ],
+        "capabilities": [
+          {
+            "type": "http_routes.v1",
+            "id": "admin-routes",
+            "display_name": "Kometa Artwork Admin",
+            "description": "Sync status and manual artwork-apply trigger for Kometa collection artwork."
+          },
+          {
+            "type": "scheduled_task.v1",
+            "id": "sync-kometa-artwork",
+            "display_name": "Apply Kometa Artwork",
+            "description": "Matches collections by title to Kometa Default-Images and applies poster/backdrop artwork."
+          }
+        ],
+        "global_config_schema": [
+          {
+            "key": "sync",
+            "title": "Kometa artwork sync",
+            "description": "Which server to update and where the artwork comes from.",
+            "json_schema": "{\"type\":\"object\",\"properties\":{\"host_api_key\":{\"type\":\"string\"},\"host_base_url\":{\"type\":\"string\"},\"kometa_base_url\":{\"type\":\"string\"},\"dry_run\":{\"type\":\"boolean\"},\"overwrite_existing\":{\"type\":\"boolean\"},\"sync_interval_minutes\":{\"type\":\"integer\",\"minimum\":15,\"maximum\":43200,\"default\":10080},\"state_file\":{\"type\":\"string\",\"default\":\".kometa-artwork-state.json\"}},\"required\":[\"host_api_key\"],\"additionalProperties\":false}",
+            "required": true,
+            "admin_form": {
+              "fields": [
+                {
+                  "key": "host_api_key",
+                  "label": "Host API Key",
+                  "description": "Vio/Silo admin API key (unscoped v2 key). Used to list collections and upload artwork via the host admin API.",
+                  "control": 3,
+                  "placeholder": "sa_\u2026",
+                  "secret": true
+                },
+                {
+                  "key": "host_base_url",
+                  "label": "Host Base URL",
+                  "description": "Base URL of the Vio/Silo server as seen from the plugin process. Defaults to localhost; the plugin runs on the same box as the server.",
+                  "control": 1,
+                  "placeholder": "http://localhost:8190"
+                },
+                {
+                  "key": "kometa_base_url",
+                  "label": "Kometa Base URL",
+                  "description": "Base URL for Kometa Default-Images. Use the jsDelivr CDN (default) or raw.githubusercontent.com as a fallback.",
+                  "control": 1,
+                  "placeholder": "https://cdn.jsdelivr.net/gh/Kometa-Team/Default-Images@master"
+                },
+                {
+                  "key": "dry_run",
+                  "label": "Dry Run",
+                  "description": "Preview matches without uploading any artwork.",
+                  "control": 5
+                },
+                {
+                  "key": "overwrite_existing",
+                  "label": "Overwrite Existing Artwork",
+                  "description": "When off, collections that already have a poster are skipped. When on, every matched collection gets fresh artwork.",
+                  "control": 5
+                },
+                {
+                  "key": "sync_interval_minutes",
+                  "label": "Sync Interval (minutes)",
+                  "description": "Minimum time between automatic syncs. The scheduled task skips runs inside this window; the admin page can always force a run.",
+                  "control": 4,
+                  "placeholder": "10080"
+                },
+                {
+                  "key": "state_file",
+                  "label": "State File",
+                  "description": "Where the plugin keeps its last-run record. Defaults inside the plugin data directory.",
+                  "control": 1,
+                  "placeholder": ".kometa-artwork-state.json"
+                }
+              ],
+              "submit_label": "Save Kometa artwork settings"
+            }
+          }
+        ],
+        "http_routes": [
+          {
+            "id": "admin",
+            "method": "GET",
+            "path": "/admin/kometa-artwork",
+            "access": "admin",
+            "navigable": true,
+            "navigation_label": "Kometa Artwork",
+            "navigation_kind": "admin"
+          },
+          {
+            "id": "admin-api",
+            "method": "*",
+            "path": "/admin/kometa-artwork/*",
+            "access": "admin"
+          }
+        ],
+        "presentation": {
+          "display_name": "Kometa Artwork",
+          "summary": "Apply Kometa Default-Images artwork to collections.",
+          "description_markdown": "Matches your Vio/Silo collections by title to the Kometa Default-Images library (~16k community collection posters) and applies matching poster/backdrop artwork. Covers franchises (Star Wars, Marvel, DC\u2026), streaming services, genres, holidays, studios, years, and awards. Run manually from the admin page or on a schedule; dry-run mode previews matches without changing anything.",
+          "setup_markdown": "Enter your Vio/Silo admin API key (an unscoped v2 key). The Host Base URL defaults to http://localhost:8190 \u2014 the plugin runs on the same box as the server, so localhost is usually right. Pick whether to overwrite collections that already have artwork, then press Apply Now on the Kometa Artwork admin page (dry-run first to preview).",
+          "homepage_url": "https://github.com/gurgles-1/vio-plugins",
+          "source_url": "https://github.com/gurgles-1/vio-plugins",
+          "support_url": "https://github.com/gurgles-1/vio-plugins/issues",
+          "publisher_name": "gurgles-1",
+          "publisher_url": "https://github.com/gurgles-1",
+          "license_spdx": "MIT"
+        }
+      },
+      "repo_url": "https://github.com/gurgles-1/vio-plugins",
+      "binaries": {
+        "linux/amd64": {
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/kometa-artwork/v0.1.0/kometa-artwork-linux-amd64",
+          "checksum": "871c3820cb6d79576712f47d7314b76f8eb3b45367534a7d72a6790c763e3b01"
+        },
+        "linux/arm64": {
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/kometa-artwork/v0.1.0/kometa-artwork-linux-arm64",
+          "checksum": "3c8d1c4ec7f6cef331e3abf36f1ed9e96386ba41c1e7653b7576889715fdd02e"
+        }
+      }
+    },
+    {
+      "manifest": {
+        "plugin_id": "com.gurgles-1.vio-cover-studio",
+        "version": "0.1.0",
+        "silo_api_version": "v1",
+        "supported_platforms": [
+          {
+            "os": "linux",
+            "arch": "amd64"
+          },
+          {
+            "os": "linux",
+            "arch": "arm64"
+          }
+        ],
+        "capabilities": [
+          {
+            "type": "http_routes.v1",
+            "id": "admin-routes",
+            "display_name": "Cover Studio Admin",
+            "description": "Cover Studio admin page: collection list, per-collection options, live previews, and manual rebuilds."
+          },
+          {
+            "type": "scheduled_task.v1",
+            "id": "rebuild-covers",
+            "display_name": "Rebuild Covers",
+            "description": "Rebuilds collection covers (mosaic poster + backdrop) for the enabled collections."
+          }
+        ],
+        "global_config_schema": [
+          {
+            "key": "covers",
+            "title": "Cover Studio",
+            "description": "Which collections get generated covers and how they look.",
+            "json_schema": "{\"type\":\"object\",\"properties\":{\"vio_url\":{\"type\":\"string\",\"default\":\"http://127.0.0.1:8080\"},\"vio_api_key\":{\"type\":\"string\"},\"tmdb_api_key\":{\"type\":\"string\"},\"collections\":{\"type\":\"string\"},\"overlay_mode\":{\"type\":\"string\",\"enum\":[\"logo\",\"text\",\"none\"],\"default\":\"logo\"},\"layout\":{\"type\":\"string\",\"enum\":[\"grid\",\"spotlight\",\"columns\"],\"default\":\"grid\"},\"refresh_hours\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":168,\"default\":24}},\"required\":[\"vio_api_key\",\"tmdb_api_key\"],\"additionalProperties\":false}",
+            "required": true,
+            "admin_form": {
+              "fields": [
+                {
+                  "key": "vio_url",
+                  "label": "Server URL",
+                  "description": "Vio/Silo server URL (the address the web app opens on, not the Jellyfin-compatible port).",
+                  "control": 1,
+                  "placeholder": "http://127.0.0.1:8080"
+                },
+                {
+                  "key": "vio_api_key",
+                  "label": "Server API Key",
+                  "description": "Vio/Silo administrator API key (Admin > API keys). Used to read collections and upload covers.",
+                  "control": 3,
+                  "placeholder": "sa_\u2026",
+                  "secret": true
+                },
+                {
+                  "key": "tmdb_api_key",
+                  "label": "TMDB API Key",
+                  "description": "TMDB API key (v3) or read access token (v4). Used to pull collection logos automatically.",
+                  "control": 3,
+                  "placeholder": "eyJhbG\u2026 or v3 api key",
+                  "secret": true
+                },
+                {
+                  "key": "collections",
+                  "label": "Collections",
+                  "description": "Collection IDs to manage, one per line (find them on the Cover Studio admin page). Leave blank to manage every manual collection.",
+                  "control": 2,
+                  "placeholder": "12\n27",
+                  "rows": 4
+                },
+                {
+                  "key": "overlay_mode",
+                  "label": "Overlay",
+                  "description": "Overlay on each cover: the auto-pulled TMDB logo, the collection title as text, or nothing.",
+                  "control": 6,
+                  "options": [
+                    {
+                      "value": "logo",
+                      "label": "Logo"
+                    },
+                    {
+                      "value": "text",
+                      "label": "Text"
+                    },
+                    {
+                      "value": "none",
+                      "label": "None"
+                    }
+                  ]
+                },
+                {
+                  "key": "layout",
+                  "label": "Layout",
+                  "description": "Mosaic arrangement of member posters.",
+                  "control": 6,
+                  "options": [
+                    {
+                      "value": "grid",
+                      "label": "Grid (3\u00d72)"
+                    },
+                    {
+                      "value": "spotlight",
+                      "label": "Spotlight (1 large + 2\u00d72)"
+                    },
+                    {
+                      "value": "columns",
+                      "label": "Columns (4 strips)"
+                    }
+                  ]
+                },
+                {
+                  "key": "refresh_hours",
+                  "label": "Refresh (hours)",
+                  "description": "Hours between automatic rebuilds of a collection. The admin page can always force a rebuild.",
+                  "control": 4,
+                  "placeholder": "24"
+                }
+              ],
+              "submit_label": "Save cover settings"
+            }
+          }
+        ],
+        "http_routes": [
+          {
+            "id": "admin",
+            "method": "GET",
+            "path": "/admin/cover-studio",
+            "access": "admin",
+            "navigable": true,
+            "navigation_label": "Cover Studio",
+            "navigation_kind": "admin"
+          },
+          {
+            "id": "admin-api",
+            "method": "*",
+            "path": "/admin/cover-studio/*",
+            "access": "admin"
+          }
+        ],
+        "presentation": {
+          "display_name": "Cover Studio",
+          "summary": "Auto-generated mosaic covers for collections.",
+          "description_markdown": "Generates Betterer-style mosaic covers for your collections \u2014 member posters arranged in a grid, spotlight, or columns layout, overlaid with the auto-pulled TMDB logo or the collection title \u2014 and keeps them updated on a schedule. Portrait covers go to the collection poster, landscape to the backdrop.",
+          "setup_markdown": "Enter your Vio/Silo server URL and an administrator API key, plus a TMDB API key for automatic logos. Pick the collections to manage (leave blank for all manual collections), choose the overlay and layout, and press Rebuild Now on the Cover Studio admin page for the first run.",
+          "homepage_url": "https://github.com/gurgles-1/vio-plugins",
+          "source_url": "https://github.com/gurgles-1/vio-plugins",
+          "support_url": "https://github.com/gurgles-1/vio-plugins/issues",
+          "publisher_name": "gurgles-1",
+          "publisher_url": "https://github.com/gurgles-1",
+          "license_spdx": "MIT"
+        }
+      },
+      "binaries": {
+        "linux/amd64": {
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-cover-studio/v0.1.0/vio-cover-studio-linux-amd64",
+          "checksum": "9de13a5bb02537ca5ebcd790e23d412c3477e0ef743c56c2c936e90a97cb5e87"
+        },
+        "linux/arm64": {
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-cover-studio/v0.1.0/vio-cover-studio-linux-arm64",
+          "checksum": "05a275e363ecd67590e93199689b9e92b9f64ab81414bde600bef253e1941fd5"
+        }
+      },
+      "repo_url": "https://github.com/gurgles-1/vio-plugins"
     }
   ]
 }
