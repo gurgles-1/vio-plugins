@@ -36,7 +36,12 @@ const overlays=[['logo','Logo'],['text','Text'],['none','None']];
 const layouts=[['grid','Grid 3×2'],['spotlight','Spotlight'],['columns','Columns']];
 function sel(name,val,opts){return '<select data-k="'+name+'">'+opts.map(o=>'<option value="'+o[0]+'"'+(o[0]===val?' selected':'')+'>'+o[1]+'</option>').join('')+'</select>'}
 async function load(){
-  const r=await fetch('/admin/cover-studio/status');state=await r.json();
+  try{
+    const ctl=new AbortController();const to=setTimeout(()=>ctl.abort(),30000);
+    const r=await fetch('/admin/cover-studio/status',{signal:ctl.signal});clearTimeout(to);
+    if(!r.ok)throw new Error('status '+r.status);
+    state=await r.json();
+  }catch(e){$('msg').textContent='error: cannot reach plugin ('+(e.name==='AbortError'?'timeout':e.message)+') — is it running?';$('msg').className='bad';return}
   if(state.error){$('msg').textContent='error: '+state.error;$('msg').className='bad';return}
   $('msg').textContent='';$('msg').className='dim';
   const tb=$('rows');tb.innerHTML='';
