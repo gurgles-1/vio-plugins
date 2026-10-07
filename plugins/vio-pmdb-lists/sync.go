@@ -12,6 +12,7 @@ import (
 
 	sdkruntime "github.com/Silo-Server/silo-plugin-sdk/pkg/pluginsdk/runtime"
 	"github.com/Silo-Server/silo-plugin-sdk/pkg/pluginsdk/runtimehost"
+	pluginv1 "github.com/Silo-Server/silo-plugin-sdk/pkg/pluginproto/silo/plugin/v1"
 )
 
 const syncSourceKey = "pmdb-lists"
@@ -103,6 +104,14 @@ func (s *runtimeServer) doSync(ctx context.Context, force bool) (*syncResult, er
 		return nil, fmt.Errorf("host connection unavailable; the plugin may still be starting")
 	}
 
+	// Resolve destination libraries: explicit names (or legacy numeric
+	// IDs) from config, falling back to auto-detecting the first
+	// Movies/Series-type library on the host.
+	movieLibID, seriesLibID, err := resolveLibraryIDs(ctx, host, cfg)
+	if err != nil {
+		return nil, err
+	}
+
 	res := &syncResult{StartedAt: time.Now(), Lists: map[string]listStat{}}
 	pmdb := newPMDBClient(cfg.PMDBAPIKey)
 	tmdb := newTMDBClient(cfg.TMDBAPIKey)
@@ -141,7 +150,7 @@ func (s *runtimeServer) doSync(ctx context.Context, force bool) (*syncResult, er
 				res.SkippedIMDb++
 				continue
 			}
-			req, err := buildRegistration(cfg, title)
+			req, err := buildRegistration(cfg, title, movieLibID, seriesLibID)
 			if err != nil {
 				res.Errors = append(res.Errors, fmt.Sprintf("%s: %v", title.Title, err))
 				continue
@@ -166,11 +175,11 @@ func (s *runtimeServer) doSync(ctx context.Context, force bool) (*syncResult, er
 	// lookup must never look like "the user deleted everything".
 	if len(res.Errors) == 0 && len(cfg.PMDBLists) > 0 {
 		libIDs := []string{}
-		if cfg.MovieLibraryID > 0 {
-			libIDs = append(libIDs, strconv.Itoa(cfg.MovieLibraryID))
+		if movieLibID != "" {
+			libIDs = append(libIDs, movieLibID)
 		}
-		if cfg.SeriesLibraryID > 0 {
-			libIDs = append(libIDs, strconv.Itoa(cfg.SeriesLibraryID))
+		if seriesLibID != "" {
+			libIDs = append(libIDs, seriesLibID)
 		}
 		rec, err := host.ReconcileVirtualMedia(ctx, syncSourceKey, keepIDs, libIDs)
 		if err != nil {
@@ -195,11 +204,66 @@ func (s *runtimeServer) doSync(ctx context.Context, force bool) (*syncResult, er
 	return res, nil
 }
 
+// resolveLibraryIDs turns the configured library names (or legacy numeric
+// IDs) into host library IDs. Blank names auto-detect the first library of
+// the matching media type.
+func resolveLibraryIDs(ctx context.Context, host *runtimehost.Client, cfg pluginConfig) (movieID, seriesID string, err error) {
+	if cfg.MovieLibraryID > 0 {
+		movieID = strconv.Itoa(cfg.MovieLibraryID)
+	}
+	if cfg.SeriesLibraryID > 0 {
+		seriesID = strconv.Itoa(cfg.SeriesLibraryID)
+	}
+	if movieID != "" && seriesID != "" {
+		return movieID, seriesID, nil
+	}
+	libs, err := host.ListLibraries(ctx, "")
+	if err != nil {
+		return "", "", fmt.Errorf("list libraries: %w", err)
+	}
+	if movieID == "" {
+		movieID, err = pickLibrary(libs, cfg.MovieLibrary, "movie", "Movies")
+		if err != nil {
+			return "", "", err
+		}
+	}
+	if seriesID == "" {
+		seriesID, err = pickLibrary(libs, cfg.SeriesLibrary, "tv", "Series")
+		if err != nil {
+			return "", "", err
+		}
+	}
+	return movieID, seriesID, nil
+}
+
+// pickLibrary finds a library by name (case-insensitive), or — when name is
+// blank — the first library with the given media type.
+func pickLibrary(libs []*pluginv1.Library, name, mediaType, label string) (string, error) {
+	if strings.TrimSpace(name) != "" {
+		for _, l := range libs {
+			if strings.EqualFold(strings.TrimSpace(l.GetName()), strings.TrimSpace(name)) {
+				return l.GetId(), nil
+			}
+		}
+		available := []string{}
+		for _, l := range libs {
+			available = append(available, l.GetName())
+		}
+		return "", fmt.Errorf("%s library %q not found (available: %s)", label, name, strings.Join(available, ", "))
+	}
+	for _, l := range libs {
+		if l.GetMediaType() == mediaType {
+			return l.GetId(), nil
+		}
+	}
+	return "", fmt.Errorf("no %s library found on the host; name one in the plugin settings", label)
+}
+
 // buildRegistration turns a resolved TMDB title into a virtual-media request.
 // Movies get a canonical virtual:// URI; series attach per-episode URIs (the
 // host rejects a series-level URI because there is no playable file at the
 // series container itself).
-func buildRegistration(cfg pluginConfig, t *tmdbTitle) (*runtimehost.VirtualMediaRequest, error) {
+func buildRegistration(cfg pluginConfig, t *tmdbTitle, movieLibID, seriesLibID string) (*runtimehost.VirtualMediaRequest, error) {
 	if strings.TrimSpace(t.Title) == "" {
 		return nil, fmt.Errorf("title is required")
 	}
@@ -217,10 +281,16 @@ func buildRegistration(cfg pluginConfig, t *tmdbTitle) (*runtimehost.VirtualMedi
 		SourceKey:      syncSourceKey,
 	}
 	if t.MediaType == "movie" {
-		req.LibraryID = strconv.Itoa(cfg.MovieLibraryID)
+		if movieLibID == "" {
+			return nil, fmt.Errorf("no Movies library configured; name one in the plugin settings")
+		}
+		req.LibraryID = movieLibID
 		req.VirtualURI = "virtual://" + "movie/" + t.IMDbID
 	} else {
-		req.LibraryID = strconv.Itoa(cfg.SeriesLibraryID)
+		if seriesLibID == "" {
+			return nil, fmt.Errorf("no Series library configured; name one in the plugin settings")
+		}
+		req.LibraryID = seriesLibID
 		for _, ep := range t.Episodes {
 			uri := fmt.Sprintf("virtual://series/%s/%d/%d", t.IMDbID, ep.Season, ep.Episode)
 			var air time.Time

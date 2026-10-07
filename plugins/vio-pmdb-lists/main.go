@@ -34,8 +34,14 @@ type pluginConfig struct {
 	PMDBAPIKey string
 	// Each entry is either a raw PMDB list ID (your own lists) or a full
 	// public list URL, e.g. https://publicmetadb.com/lists/u/snoak/trending-kids-movies
-	PMDBLists           []string
-	TMDBAPIKey          string
+	PMDBLists []string
+	TMDBAPIKey string
+	// Library names as shown in Vio (e.g. "Movies", "TV"). Blank means
+	// auto-detect the first library of the matching media type.
+	MovieLibrary  string
+	SeriesLibrary string
+	// Legacy numeric IDs from the 0.2.0 dynamic-select config; honored
+	// when the name fields are blank.
 	MovieLibraryID      int
 	SeriesLibraryID     int
 	SyncIntervalMinutes int
@@ -52,8 +58,9 @@ func (c pluginConfig) validate() error {
 	if strings.TrimSpace(c.TMDBAPIKey) == "" {
 		return fmt.Errorf("TMDB API key is not configured")
 	}
-	if c.MovieLibraryID <= 0 && c.SeriesLibraryID <= 0 {
-		return fmt.Errorf("no destination library configured; pick a Movies and/or Series library")
+	if strings.TrimSpace(c.MovieLibrary) == "" && strings.TrimSpace(c.SeriesLibrary) == "" &&
+		c.MovieLibraryID <= 0 && c.SeriesLibraryID <= 0 {
+		return fmt.Errorf("no destination library configured; name a Movies and/or Series library (or leave blank to auto-detect)")
 	}
 	return nil
 }
@@ -90,6 +97,8 @@ func (s *runtimeServer) Configure(_ context.Context, request *pb.ConfigureReques
 		if len(cfg.PMDBLists) == 0 {
 			cfg.PMDBLists = parseListIDs(values["pmdb_list_ids"])
 		}
+		cfg.MovieLibrary = strings.TrimSpace(strVal(values["movie_library"]))
+		cfg.SeriesLibrary = strings.TrimSpace(strVal(values["series_library"]))
 		cfg.MovieLibraryID, _ = intVal(values["movie_library_id"])
 		cfg.SeriesLibraryID, _ = intVal(values["series_library_id"])
 		if n, ok := intVal(values["sync_interval_minutes"]); ok && n >= 15 {
@@ -175,6 +184,8 @@ func (s *runtimeServer) statusJSON() *pb.HandleHTTPResponse {
 	out := map[string]any{
 		"configured_lists":      len(cfg.PMDBLists),
 		"lists":                 cfg.PMDBLists,
+		"movie_library":         cfg.MovieLibrary,
+		"series_library":        cfg.SeriesLibrary,
 		"movie_library_id":      cfg.MovieLibraryID,
 		"series_library_id":     cfg.SeriesLibraryID,
 		"sync_interval_minutes": cfg.SyncIntervalMinutes,

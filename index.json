@@ -1,9 +1,19 @@
 {
   "plugins": [
     {
+      "binaries": {
+        "linux/amd64": {
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.1/vio-pmdb-lists-linux-amd64",
+          "checksum": "4a5335f1928f98fdf11afdcbe95a7ac458b172f67c4d657d657db1ec29ecf812"
+        },
+        "linux/arm64": {
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.1/vio-pmdb-lists-linux-arm64",
+          "checksum": "491b89df15c5314a9ee71b2e3bf0af5d9f0dc1a054f81f74c3446372fdc97180"
+        }
+      },
       "manifest": {
         "plugin_id": "com.gurgles-1.vio-pmdb-lists",
-        "version": "0.2.0",
+        "version": "0.2.1",
         "silo_api_version": "v1",
         "supported_platforms": [
           {
@@ -34,23 +44,23 @@
             "key": "sync",
             "title": "PMDB list sync",
             "description": "Which PublicMetaDB lists to import and where to put them.",
-            "json_schema": "{\"type\":\"object\",\"properties\":{\"pmdb_api_key\":{\"type\":\"string\"},\"pmdb_lists\":{\"type\":\"string\"},\"tmdb_api_key\":{\"type\":\"string\"},\"movie_library_id\":{\"type\":\"integer\",\"minimum\":1},\"series_library_id\":{\"type\":\"integer\",\"minimum\":1},\"sync_interval_minutes\":{\"type\":\"integer\",\"minimum\":15,\"maximum\":10080,\"default\":720},\"state_file\":{\"type\":\"string\",\"default\":\".vio-pmdb-lists-state.json\"}},\"required\":[\"pmdb_api_key\",\"pmdb_lists\",\"tmdb_api_key\"],\"additionalProperties\":false}",
+            "json_schema": "{\"type\":\"object\",\"properties\":{\"pmdb_api_key\":{\"type\":\"string\"},\"pmdb_lists\":{\"type\":\"string\"},\"tmdb_api_key\":{\"type\":\"string\"},\"movie_library_id\":{\"type\":\"integer\",\"minimum\":1},\"series_library_id\":{\"type\":\"integer\",\"minimum\":1},\"sync_interval_minutes\":{\"type\":\"integer\",\"minimum\":15,\"maximum\":10080,\"default\":720},\"state_file\":{\"type\":\"string\",\"default\":\".vio-pmdb-lists-state.json\"},\"movie_library\":{\"type\":\"string\"},\"series_library\":{\"type\":\"string\"}},\"required\":[\"pmdb_api_key\",\"pmdb_lists\",\"tmdb_api_key\"],\"additionalProperties\":false}",
             "required": true,
             "admin_form": {
               "fields": [
                 {
                   "key": "pmdb_api_key",
                   "label": "PublicMetaDB API Key",
-                  "description": "Your PublicMetaDB API key (publicmetadb.com → account settings). Used to read your lists.",
+                  "description": "Your PublicMetaDB API key (publicmetadb.com \u2192 account settings). Used to read your lists.",
                   "control": 3,
-                  "placeholder": "pmdb_…",
+                  "placeholder": "pmdb_\u2026",
                   "required": true,
                   "secret": true
                 },
                 {
                   "key": "pmdb_lists",
                   "label": "PMDB Lists",
-                  "description": "One entry per line: a PublicMetaDB list ID (your own lists), or a full public list URL like https://publicmetadb.com/lists/u/snoak/trending-kids-movies — public lists are read directly, no copy needed.",
+                  "description": "One entry per line: a PublicMetaDB list ID (your own lists), or a full public list URL like https://publicmetadb.com/lists/u/snoak/trending-kids-movies \u2014 public lists are read directly, no copy needed.",
                   "control": 2,
                   "placeholder": "https://publicmetadb.com/lists/u/snoak/trending-kids-movies\npvg2vr8nuvkh2g5",
                   "required": true,
@@ -59,25 +69,25 @@
                 {
                   "key": "tmdb_api_key",
                   "label": "TMDB API Key",
-                  "description": "TMDB API key (v3) or read access token (v4). Used for title metadata and TMDB → IMDb resolution.",
+                  "description": "TMDB API key (v3) or read access token (v4). Used for title metadata and TMDB \u2192 IMDb resolution.",
                   "control": 3,
-                  "placeholder": "eyJhbG… or v3 api key",
+                  "placeholder": "eyJhbG\u2026 or v3 api key",
                   "required": true,
                   "secret": true
                 },
                 {
-                  "key": "movie_library_id",
+                  "key": "movie_library",
                   "label": "Movies Library",
-                  "description": "Destination Vio Movies library. Create a virtual one at Settings → Libraries with the \"Add Virtual\" button if needed.",
-                  "control": 6,
-                  "dynamic_options": true
+                  "description": "Vio Movies library name (e.g. Movies). Leave blank to auto-detect the first Movies-type library.",
+                  "control": 1,
+                  "placeholder": "Movies"
                 },
                 {
-                  "key": "series_library_id",
+                  "key": "series_library",
                   "label": "Series Library",
-                  "description": "Destination Vio Series library. Create a virtual one at Settings → Libraries with the \"Add Virtual\" button if needed.",
-                  "control": 6,
-                  "dynamic_options": true
+                  "description": "Vio Series library name (e.g. TV). Leave blank to auto-detect the first Series-type library.",
+                  "control": 1,
+                  "placeholder": "TV"
                 },
                 {
                   "key": "sync_interval_minutes",
@@ -118,25 +128,14 @@
         "presentation": {
           "display_name": "PMDB Lists (Vio)",
           "summary": "Import PublicMetaDB lists as virtual media libraries.",
-          "description_markdown": "Reads your PublicMetaDB lists — or anyone's *public* lists, pasted as full URLs — on a schedule and registers every title as zero-storage virtual media in your Movies and Series virtual libraries. Items removed from a list are removed from Vio on the next clean sync. Playback is handled by your configured virtual stream provider (e.g. Vio Virtual Library with AIOStreams).",
-          "setup_markdown": "Enter your PublicMetaDB API key and one list per line — a list ID for your own lists, or a full public list URL like https://publicmetadb.com/lists/u/snoak/trending-kids-movies (public lists are read directly, no copy needed). Add a TMDB API key for metadata and IMDb resolution, then pick the destination Movies and Series virtual libraries (create them at Settings → Libraries with the \"Add Virtual\" button if needed). Press Sync Now on the PMDB Lists admin page to run the first import.",
+          "description_markdown": "Reads your PublicMetaDB lists \u2014 or anyone's *public* lists, pasted as full URLs \u2014 on a schedule and registers every title as zero-storage virtual media in your Movies and Series virtual libraries. Items removed from a list are removed from Vio on the next clean sync. Playback is handled by your configured virtual stream provider (e.g. Vio Virtual Library with AIOStreams).",
+          "setup_markdown": "Enter your PublicMetaDB API key and one list per line \u2014 a list ID for your own lists, or a full public list URL like https://publicmetadb.com/lists/u/snoak/trending-kids-movies (public lists are read directly, no copy needed). Add a TMDB API key for metadata and IMDb resolution, then name your destination Movies and Series libraries (leave blank to auto-detect them). Press Sync Now on the PMDB Lists admin page to run the first import.",
           "homepage_url": "https://github.com/gurgles-1/vio-pmdb-lists",
           "source_url": "https://github.com/gurgles-1/vio-pmdb-lists",
           "support_url": "https://github.com/gurgles-1/vio-pmdb-lists/issues",
           "publisher_name": "gurgles-1",
           "publisher_url": "https://github.com/gurgles-1",
           "license_spdx": "MIT"
-        }
-      },
-      "repo_url": "https://github.com/gurgles-1/vio-plugins",
-      "binaries": {
-        "linux/amd64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.0/vio-pmdb-lists-linux-amd64",
-          "checksum": "bec50c7268805e84d2bec579d49d66c56d8685293c0320eda68fa420c6cf1f5d"
-        },
-        "linux/arm64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.0/vio-pmdb-lists-linux-arm64",
-          "checksum": "1f4bff82a61af810b176b8704fe1d4a0f54acc3ee4d5160304972b26c8196687"
         }
       }
     },
@@ -181,9 +180,9 @@
                 {
                   "key": "pmdb_api_key",
                   "label": "PublicMetaDB API Key",
-                  "description": "Your PublicMetaDB API key (publicmetadb.com → account settings). Used to read your lists.",
+                  "description": "Your PublicMetaDB API key (publicmetadb.com \u2192 account settings). Used to read your lists.",
                   "control": 3,
-                  "placeholder": "pmdb_…",
+                  "placeholder": "pmdb_\u2026",
                   "required": true,
                   "secret": true
                 },
@@ -199,9 +198,9 @@
                 {
                   "key": "tmdb_api_key",
                   "label": "TMDB API Key",
-                  "description": "TMDB API key (v3) or read access token (v4). Used for posters, metadata, and TMDB → IMDb resolution.",
+                  "description": "TMDB API key (v3) or read access token (v4). Used for posters, metadata, and TMDB \u2192 IMDb resolution.",
                   "control": 3,
-                  "placeholder": "eyJhbG… or v3 api key",
+                  "placeholder": "eyJhbG\u2026 or v3 api key",
                   "required": true,
                   "secret": true
                 },
@@ -244,7 +243,7 @@
         "presentation": {
           "display_name": "PMDB Lists (Silo)",
           "summary": "Browse PublicMetaDB lists inside Silo.",
-          "description_markdown": "Browsable pages for your PublicMetaDB lists inside Silo. A scheduled task keeps the lists cached with TMDB posters and metadata, and each title is badged with whether it is already in your Silo libraries — handy for spotting what's on the list but missing from the library. (Silo's plugin API cannot add library items, so this is a discovery view; the companion Vio plugin turns the same lists into playable virtual libraries.)",
+          "description_markdown": "Browsable pages for your PublicMetaDB lists inside Silo. A scheduled task keeps the lists cached with TMDB posters and metadata, and each title is badged with whether it is already in your Silo libraries \u2014 handy for spotting what's on the list but missing from the library. (Silo's plugin API cannot add library items, so this is a discovery view; the companion Vio plugin turns the same lists into playable virtual libraries.)",
           "setup_markdown": "Enter your PublicMetaDB API key and one list ID per line, add a TMDB API key for posters and metadata, then press Sync Now on the PMDB Lists page to run the first import.",
           "homepage_url": "https://github.com/gurgles-1/silo-pmdb-lists",
           "source_url": "https://github.com/gurgles-1/silo-pmdb-lists",

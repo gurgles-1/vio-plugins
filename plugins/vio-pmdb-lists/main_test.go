@@ -29,15 +29,15 @@ func TestYearFromDate(t *testing.T) {
 }
 
 func TestConfigValidate(t *testing.T) {
-	ok := pluginConfig{PMDBAPIKey: "k", PMDBListIDs: []string{"a"}, TMDBAPIKey: "t", MovieLibraryID: 1}
+	ok := pluginConfig{PMDBAPIKey: "k", PMDBLists: []string{"a"}, TMDBAPIKey: "t", MovieLibrary: "Movies"}
 	if err := ok.validate(); err != nil {
 		t.Fatalf("valid config rejected: %v", err)
 	}
 	bad := []pluginConfig{
-		{TMDBAPIKey: "t", PMDBListIDs: []string{"a"}, MovieLibraryID: 1},
-		{PMDBAPIKey: "k", TMDBAPIKey: "t", MovieLibraryID: 1},
-		{PMDBAPIKey: "k", PMDBListIDs: []string{"a"}},
-		{PMDBAPIKey: "k", PMDBListIDs: []string{"a"}, TMDBAPIKey: "t"},
+		{TMDBAPIKey: "t", PMDBLists: []string{"a"}, MovieLibrary: "Movies"},
+		{PMDBAPIKey: "k", TMDBAPIKey: "t", MovieLibrary: "Movies"},
+		{PMDBAPIKey: "k", PMDBLists: []string{"a"}},
+		{PMDBAPIKey: "k", PMDBLists: []string{"a"}, TMDBAPIKey: "t"},
 	}
 	for i, c := range bad {
 		if err := c.validate(); err == nil {
@@ -47,9 +47,9 @@ func TestConfigValidate(t *testing.T) {
 }
 
 func TestBuildRegistrationMovie(t *testing.T) {
-	cfg := pluginConfig{MovieLibraryID: 3, SeriesLibraryID: 4}
+	cfg := pluginConfig{MovieLibrary: "Movies", SeriesLibrary: "TV"}
 	title := &tmdbTitle{TMDBID: 550, MediaType: "movie", IMDbID: "tt0137523", Title: "Fight Club", Year: 1999}
-	req, err := buildRegistration(cfg, title)
+	req, err := buildRegistration(cfg, title, "3", "4")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -62,12 +62,12 @@ func TestBuildRegistrationMovie(t *testing.T) {
 }
 
 func TestBuildRegistrationSeries(t *testing.T) {
-	cfg := pluginConfig{MovieLibraryID: 3, SeriesLibraryID: 4}
+	cfg := pluginConfig{MovieLibrary: "Movies", SeriesLibrary: "TV"}
 	title := &tmdbTitle{
 		TMDBID: 1396, MediaType: "tv", IMDbID: "tt0903747", Title: "Breaking Bad", Year: 2008,
 		Episodes: []tmdbEpisode{{Season: 1, Episode: 1, Title: "Pilot"}},
 	}
-	req, err := buildRegistration(cfg, title)
+	req, err := buildRegistration(cfg, title, "3", "4")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -81,7 +81,7 @@ func TestBuildRegistrationSeries(t *testing.T) {
 		t.Fatalf("bad library: %s", req.LibraryID)
 	}
 	// A series with no episodes must be rejected, not registered empty.
-	_, err = buildRegistration(cfg, &tmdbTitle{TMDBID: 1, MediaType: "tv", IMDbID: "tt1", Title: "X"})
+	_, err = buildRegistration(cfg, &tmdbTitle{TMDBID: 1, MediaType: "tv", IMDbID: "tt1", Title: "X"}, "3", "4")
 	if err == nil {
 		t.Fatal("expected error for episode-less series")
 	}

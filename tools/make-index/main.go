@@ -29,7 +29,7 @@ type repositoryIndex struct {
 func main() {
 	repoRoot := os.Args[1]
 	plugins := [][2]string{
-		{"vio-pmdb-lists", "0.2.0"},
+		{"vio-pmdb-lists", "0.2.1"},
 		{"silo-pmdb-lists", "0.1.0"},
 		{"vio-aiostreams-watchsync", "0.1.0"},
 		{"scrob-watchprovider", "0.1.3"},
