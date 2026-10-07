@@ -496,7 +496,7 @@
     {
       "manifest": {
         "plugin_id": "com.gurgles-1.vio-cover-studio",
-        "version": "0.1.3",
+        "version": "0.1.4",
         "silo_api_version": "v1",
         "supported_platforms": [
           {
@@ -625,9 +625,27 @@
             "navigation_kind": "admin"
           },
           {
-            "id": "admin-api",
-            "method": "*",
-            "path": "/admin/cover-studio/*",
+            "id": "admin-status",
+            "method": "GET",
+            "path": "/admin/cover-studio/status",
+            "access": "admin"
+          },
+          {
+            "id": "admin-preview",
+            "method": "GET",
+            "path": "/admin/cover-studio/preview",
+            "access": "admin"
+          },
+          {
+            "id": "admin-rebuild",
+            "method": "POST",
+            "path": "/admin/cover-studio/rebuild",
+            "access": "admin"
+          },
+          {
+            "id": "admin-options",
+            "method": "POST",
+            "path": "/admin/cover-studio/options",
             "access": "admin"
           }
         ],
@@ -647,12 +665,12 @@
       "repo_url": "https://github.com/gurgles-1/vio-plugins",
       "binaries": {
         "linux/amd64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-cover-studio/v0.1.3/vio-cover-studio-linux-amd64",
-          "checksum": "4dcc74239208d55beea36fdff87d6f92c871e79677ac976155ef7c22b7d7401e"
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-cover-studio/v0.1.4/vio-cover-studio-linux-amd64",
+          "checksum": "ea51d203e12797c00c903246b593a11970c4932a665ad6552e26415e21c6a67d"
         },
         "linux/arm64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-cover-studio/v0.1.3/vio-cover-studio-linux-arm64",
-          "checksum": "c7cf7bc0bc562f71d4a194c6a08ba63c45ac978d4009d6058f57e333719f4795"
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-cover-studio/v0.1.4/vio-cover-studio-linux-arm64",
+          "checksum": "738382c7dffee50f0897558db76e96724a0f11217bb4cf7ab14f3ab920afad98"
         }
       }
     }
