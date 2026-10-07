@@ -19,6 +19,7 @@ legacy/human-readable listing; Vio reads `index.json`.)
 | PMDB Lists (Vio) | `com.gurgles-1.vio-pmdb-lists` | Syncs PublicMetaDB lists into Vio as zero-storage virtual movies and series (full episode metadata). Playback via Vio Virtual Library + AIOStreams. |
 | PMDB Lists (Silo) | `com.gurgles-1.silo-pmdb-lists` | Browsable PMDB list pages inside Silo with TMDB posters and "in library / missing" badges. Discovery view only — Silo's plugin API cannot inject library items. |
 | AIOStreams Watch Sync | `com.gurgles-1.vio-aiostreams-watchsync` | Bidirectional watch-state sync between AIOStreams and Vio via AIOStreams' handoff protocol (push sink + pull endpoint) and Vio's watch-sync provider API. |
+| Scrob Watch Provider | `silo.watchprovider.scrob` | Syncs watch history, progress, ratings and live playback with a self-hosted Scrob instance. Vendored from Joloxx9/silo-plugin-watchprovider-scrob v0.1.3 (checksum-verified upstream binaries). |
 
 Each plugin keeps its source under `plugins/<name>/` and its released binaries under `dist/<name>/<version>/`.
 
