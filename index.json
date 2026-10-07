@@ -3,17 +3,17 @@
     {
       "binaries": {
         "linux/amd64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.1/vio-pmdb-lists-linux-amd64",
-          "checksum": "4a5335f1928f98fdf11afdcbe95a7ac458b172f67c4d657d657db1ec29ecf812"
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.2/vio-pmdb-lists-linux-amd64",
+          "checksum": "53fbb7613f330423b9a3f7917f3b24af4f2377a65f92bdb5aba1ef40a93faec2"
         },
         "linux/arm64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.1/vio-pmdb-lists-linux-arm64",
-          "checksum": "491b89df15c5314a9ee71b2e3bf0af5d9f0dc1a054f81f74c3446372fdc97180"
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.2/vio-pmdb-lists-linux-arm64",
+          "checksum": "54674bd7e0e4c2659a6b1d3a87931ab08ba1192380174677dc7efdff490a1174"
         }
       },
       "manifest": {
         "plugin_id": "com.gurgles-1.vio-pmdb-lists",
-        "version": "0.2.1",
+        "version": "0.2.2",
         "silo_api_version": "v1",
         "supported_platforms": [
           {
@@ -44,7 +44,7 @@
             "key": "sync",
             "title": "PMDB list sync",
             "description": "Which PublicMetaDB lists to import and where to put them.",
-            "json_schema": "{\"type\":\"object\",\"properties\":{\"pmdb_api_key\":{\"type\":\"string\"},\"pmdb_lists\":{\"type\":\"string\"},\"tmdb_api_key\":{\"type\":\"string\"},\"movie_library_id\":{\"type\":\"integer\",\"minimum\":1},\"series_library_id\":{\"type\":\"integer\",\"minimum\":1},\"sync_interval_minutes\":{\"type\":\"integer\",\"minimum\":15,\"maximum\":10080,\"default\":720},\"state_file\":{\"type\":\"string\",\"default\":\".vio-pmdb-lists-state.json\"},\"movie_library\":{\"type\":\"string\"},\"series_library\":{\"type\":\"string\"}},\"required\":[\"pmdb_api_key\",\"pmdb_lists\",\"tmdb_api_key\"],\"additionalProperties\":false}",
+            "json_schema": "{\"type\":\"object\",\"properties\":{\"pmdb_api_key\":{\"type\":\"string\"},\"pmdb_lists\":{\"type\":\"string\"},\"tmdb_api_key\":{\"type\":\"string\"},\"movie_library_id\":{\"type\":\"integer\",\"minimum\":1},\"series_library_id\":{\"type\":\"integer\",\"minimum\":1},\"sync_interval_minutes\":{\"type\":\"integer\",\"minimum\":15,\"maximum\":10080,\"default\":720},\"state_file\":{\"type\":\"string\",\"default\":\".vio-pmdb-lists-state.json\"},\"movie_library\":{\"type\":\"string\"},\"series_library\":{\"type\":\"string\"}},\"required\":[],\"additionalProperties\":false}",
             "required": true,
             "admin_form": {
               "fields": [
@@ -54,7 +54,6 @@
                   "description": "Your PublicMetaDB API key (publicmetadb.com \u2192 account settings). Used to read your lists.",
                   "control": 3,
                   "placeholder": "pmdb_\u2026",
-                  "required": true,
                   "secret": true
                 },
                 {
@@ -72,7 +71,6 @@
                   "description": "TMDB API key (v3) or read access token (v4). Used for title metadata and TMDB \u2192 IMDb resolution.",
                   "control": 3,
                   "placeholder": "eyJhbG\u2026 or v3 api key",
-                  "required": true,
                   "secret": true
                 },
                 {
