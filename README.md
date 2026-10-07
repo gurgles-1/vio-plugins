@@ -1,6 +1,6 @@
 # vio-plugins
 
-Evan's personal plugin collection for Vio (and Silo). Add the catalog once; every plugin in this repo shows up.
+A personal plugin collection for Vio (and Silo). Add the catalog once; every plugin in this repo shows up.
 
 ## Add to Vio
 
