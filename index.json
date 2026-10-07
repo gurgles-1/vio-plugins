@@ -3,17 +3,17 @@
     {
       "binaries": {
         "linux/amd64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.2/vio-pmdb-lists-linux-amd64",
-          "checksum": "53fbb7613f330423b9a3f7917f3b24af4f2377a65f92bdb5aba1ef40a93faec2"
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.3/vio-pmdb-lists-linux-amd64",
+          "checksum": "5c0ac460057bc03a51b5e336a1c7f29159dc2f59d7d2b7aedbf3c3db8bb6eb26"
         },
         "linux/arm64": {
-          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.2/vio-pmdb-lists-linux-arm64",
-          "checksum": "54674bd7e0e4c2659a6b1d3a87931ab08ba1192380174677dc7efdff490a1174"
+          "url": "https://raw.githubusercontent.com/gurgles-1/vio-plugins/main/dist/vio-pmdb-lists/v0.2.3/vio-pmdb-lists-linux-arm64",
+          "checksum": "582ce456f0b882822f966c4494733d5de5c49c56e84d4a9d32eb37ed1a7d27b8"
         }
       },
       "manifest": {
         "plugin_id": "com.gurgles-1.vio-pmdb-lists",
-        "version": "0.2.2",
+        "version": "0.2.3",
         "silo_api_version": "v1",
         "supported_platforms": [
           {
@@ -44,7 +44,7 @@
             "key": "sync",
             "title": "PMDB list sync",
             "description": "Which PublicMetaDB lists to import and where to put them.",
-            "json_schema": "{\"type\":\"object\",\"properties\":{\"pmdb_api_key\":{\"type\":\"string\"},\"pmdb_lists\":{\"type\":\"string\"},\"tmdb_api_key\":{\"type\":\"string\"},\"movie_library_id\":{\"type\":\"integer\",\"minimum\":1},\"series_library_id\":{\"type\":\"integer\",\"minimum\":1},\"sync_interval_minutes\":{\"type\":\"integer\",\"minimum\":15,\"maximum\":10080,\"default\":720},\"state_file\":{\"type\":\"string\",\"default\":\".vio-pmdb-lists-state.json\"},\"movie_library\":{\"type\":\"string\"},\"series_library\":{\"type\":\"string\"}},\"required\":[],\"additionalProperties\":false}",
+            "json_schema": "{\"type\":\"object\",\"properties\":{\"pmdb_api_key\":{\"type\":\"string\"},\"pmdb_lists\":{\"type\":\"string\"},\"tmdb_api_key\":{\"type\":\"string\"},\"movie_library_id\":{\"type\":\"integer\",\"minimum\":1},\"series_library_id\":{\"type\":\"integer\",\"minimum\":1},\"sync_interval_minutes\":{\"type\":\"integer\",\"minimum\":15,\"maximum\":10080,\"default\":720},\"state_file\":{\"type\":\"string\",\"default\":\".vio-pmdb-lists-state.json\"},\"movie_library\":{\"type\":\"string\"},\"series_library\":{\"type\":\"string\"}},\"required\":[\"pmdb_api_key\",\"pmdb_lists\",\"tmdb_api_key\"],\"additionalProperties\":false}",
             "required": true,
             "admin_form": {
               "fields": [

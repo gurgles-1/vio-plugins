@@ -78,7 +78,7 @@
         "submit_label": "Save PMDB list sync"
       },
       "description": "Which PublicMetaDB lists to import and where to put them.",
-      "json_schema": "{\"type\":\"object\",\"properties\":{\"pmdb_api_key\":{\"type\":\"string\"},\"pmdb_lists\":{\"type\":\"string\"},\"tmdb_api_key\":{\"type\":\"string\"},\"movie_library_id\":{\"type\":\"integer\",\"minimum\":1},\"series_library_id\":{\"type\":\"integer\",\"minimum\":1},\"sync_interval_minutes\":{\"type\":\"integer\",\"minimum\":15,\"maximum\":10080,\"default\":720},\"state_file\":{\"type\":\"string\",\"default\":\".vio-pmdb-lists-state.json\"},\"movie_library\":{\"type\":\"string\"},\"series_library\":{\"type\":\"string\"}},\"required\":[],\"additionalProperties\":false}",
+      "json_schema": "{\"type\":\"object\",\"properties\":{\"pmdb_api_key\":{\"type\":\"string\"},\"pmdb_lists\":{\"type\":\"string\"},\"tmdb_api_key\":{\"type\":\"string\"},\"movie_library_id\":{\"type\":\"integer\",\"minimum\":1},\"series_library_id\":{\"type\":\"integer\",\"minimum\":1},\"sync_interval_minutes\":{\"type\":\"integer\",\"minimum\":15,\"maximum\":10080,\"default\":720},\"state_file\":{\"type\":\"string\",\"default\":\".vio-pmdb-lists-state.json\"},\"movie_library\":{\"type\":\"string\"},\"series_library\":{\"type\":\"string\"}},\"required\":[\"pmdb_api_key\",\"pmdb_lists\",\"tmdb_api_key\"],\"additionalProperties\":false}",
       "key": "sync",
       "required": true,
       "title": "PMDB list sync"
@@ -125,5 +125,5 @@
       "os": "linux"
     }
   ],
-  "version": "0.2.2"
+  "version": "0.2.3"
 }
