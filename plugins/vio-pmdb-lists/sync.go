@@ -276,11 +276,11 @@ func buildRegistration(cfg pluginConfig, t *tmdbTitle, movieLibID, seriesLibID s
 	}
 	req := &runtimehost.VirtualMediaRequest{
 		MediaType:      hostMediaType,
-		Title:          t.Title,
+		Title:          strings.TrimSpace(t.Title),
 		Year:           t.Year,
 		IMDbID:         t.IMDbID,
 		TMDBID:         strconv.Itoa(t.TMDBID),
-		Overview:       t.Overview,
+		Overview:       strings.TrimSpace(t.Overview),
 		Genres:         t.Genres,
 		PosterPath:     t.PosterURL,
 		BackdropPath:   t.BackdropURL,
@@ -307,8 +307,8 @@ func buildRegistration(cfg pluginConfig, t *tmdbTitle, movieLibID, seriesLibID s
 			req.Episodes = append(req.Episodes, runtimehost.VirtualEpisode{
 				SeasonNumber:   ep.Season,
 				EpisodeNumber:  ep.Episode,
-				Title:          ep.Title,
-				Overview:       ep.Overview,
+				Title:          strings.TrimSpace(ep.Title),
+				Overview:       strings.TrimSpace(ep.Overview),
 				AirDate:        air,
 				RuntimeMinutes: ep.Runtime,
 				StillPath:      ep.StillURL,
