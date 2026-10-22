@@ -1,0 +1,830 @@
+[
+  {
+    "title": "A Bug's Life",
+    "year": 1998,
+    "tmdbid": 9487,
+    "imdbid": "tt0120623"
+  },
+  {
+    "title": "A Minecraft Movie",
+    "year": 2025,
+    "tmdbid": 950387,
+    "imdbid": "tt3566834"
+  },
+  {
+    "title": "Abominable",
+    "year": 2019,
+    "tmdbid": 431580,
+    "imdbid": "tt6324278"
+  },
+  {
+    "title": "Antz",
+    "year": 1998,
+    "tmdbid": 8916,
+    "imdbid": "tt0120587"
+  },
+  {
+    "title": "Avatar Aang: The Last Airbender",
+    "year": 2026,
+    "tmdbid": 980431,
+    "imdbid": "tt18259538"
+  },
+  {
+    "title": "Bee Movie",
+    "year": 2007,
+    "tmdbid": 5559,
+    "imdbid": "tt0389790"
+  },
+  {
+    "title": "Brave",
+    "year": 2012,
+    "tmdbid": 62177,
+    "imdbid": "tt1217209"
+  },
+  {
+    "title": "Captain Underpants: The First Epic Movie",
+    "year": 2017,
+    "tmdbid": 268531,
+    "imdbid": "tt2091256"
+  },
+  {
+    "title": "Cars",
+    "year": 2006,
+    "tmdbid": 920,
+    "imdbid": "tt0317219"
+  },
+  {
+    "title": "Cars 2",
+    "year": 2011,
+    "tmdbid": 49013,
+    "imdbid": "tt1216475"
+  },
+  {
+    "title": "Cars 3",
+    "year": 2017,
+    "tmdbid": 260514,
+    "imdbid": "tt3606752"
+  },
+  {
+    "title": "Casper",
+    "year": 1995,
+    "tmdbid": 8839,
+    "imdbid": "tt0112642"
+  },
+  {
+    "title": "Charlie and the Chocolate Factory",
+    "year": 2005,
+    "tmdbid": 118,
+    "imdbid": "tt0367594"
+  },
+  {
+    "title": "Chicken Run",
+    "year": 2000,
+    "tmdbid": 7443,
+    "imdbid": "tt0120630"
+  },
+  {
+    "title": "Coco",
+    "year": 2017,
+    "tmdbid": 354912,
+    "imdbid": "tt2380307"
+  },
+  {
+    "title": "Coraline",
+    "year": 2009,
+    "tmdbid": 14836,
+    "imdbid": "tt0327597"
+  },
+  {
+    "title": "Coyote vs. Acme",
+    "year": 2026,
+    "tmdbid": 1204680,
+    "imdbid": "tt1756855"
+  },
+  {
+    "title": "Despicable Me",
+    "year": 2010,
+    "tmdbid": 20352,
+    "imdbid": "tt1323594"
+  },
+  {
+    "title": "Despicable Me 2",
+    "year": 2013,
+    "tmdbid": 93456,
+    "imdbid": "tt1690953"
+  },
+  {
+    "title": "Despicable Me 3",
+    "year": 2017,
+    "tmdbid": 324852,
+    "imdbid": "tt3469046"
+  },
+  {
+    "title": "Despicable Me 4",
+    "year": 2024,
+    "tmdbid": 519182,
+    "imdbid": "tt7510222"
+  },
+  {
+    "title": "Dog Man",
+    "year": 2025,
+    "tmdbid": 774370,
+    "imdbid": "tt10954718"
+  },
+  {
+    "title": "Elemental",
+    "year": 2023,
+    "tmdbid": 976573,
+    "imdbid": "tt15789038"
+  },
+  {
+    "title": "Elio",
+    "year": 2025,
+    "tmdbid": 1022787,
+    "imdbid": "tt4900148"
+  },
+  {
+    "title": "Fantastic Mr. Fox",
+    "year": 2009,
+    "tmdbid": 10315,
+    "imdbid": "tt0432283"
+  },
+  {
+    "title": "Finding Dory",
+    "year": 2016,
+    "tmdbid": 127380,
+    "imdbid": "tt2277860"
+  },
+  {
+    "title": "Finding Nemo",
+    "year": 2003,
+    "tmdbid": 12,
+    "imdbid": "tt0266543"
+  },
+  {
+    "title": "Flushed Away",
+    "year": 2006,
+    "tmdbid": 11619,
+    "imdbid": "tt0424095"
+  },
+  {
+    "title": "Forgotten Island",
+    "year": 2026,
+    "tmdbid": 1465063,
+    "imdbid": "tt36583977"
+  },
+  {
+    "title": "Gabby's Dollhouse: The Movie",
+    "year": 2025,
+    "tmdbid": 1280282,
+    "imdbid": "tt32214143"
+  },
+  {
+    "title": "GOAT",
+    "year": 2026,
+    "tmdbid": 1297842,
+    "imdbid": "tt27613895"
+  },
+  {
+    "title": "Hercules",
+    "year": 1997,
+    "tmdbid": 11970,
+    "imdbid": "tt0119282"
+  },
+  {
+    "title": "Hocus Pocus",
+    "year": 1993,
+    "tmdbid": 10439,
+    "imdbid": "tt0107120"
+  },
+  {
+    "title": "Home Alone",
+    "year": 1990,
+    "tmdbid": 771,
+    "imdbid": "tt0099785"
+  },
+  {
+    "title": "Hop",
+    "year": 2011,
+    "tmdbid": 50359,
+    "imdbid": "tt1411704"
+  },
+  {
+    "title": "Hoppers",
+    "year": 2026,
+    "tmdbid": 1327819,
+    "imdbid": "tt26443616"
+  },
+  {
+    "title": "How to Train Your Dragon",
+    "year": 2025,
+    "tmdbid": 1087192,
+    "imdbid": "tt26743210"
+  },
+  {
+    "title": "How to Train Your Dragon",
+    "year": 2010,
+    "tmdbid": 10191,
+    "imdbid": "tt0892769"
+  },
+  {
+    "title": "How to Train Your Dragon 2",
+    "year": 2014,
+    "tmdbid": 82702,
+    "imdbid": "tt1646971"
+  },
+  {
+    "title": "How to Train Your Dragon: The Hidden World",
+    "year": 2019,
+    "tmdbid": 166428,
+    "imdbid": "tt2386490"
+  },
+  {
+    "title": "Incredibles 2",
+    "year": 2018,
+    "tmdbid": 260513,
+    "imdbid": "tt3606756"
+  },
+  {
+    "title": "Inside Out",
+    "year": 2015,
+    "tmdbid": 150540,
+    "imdbid": "tt2096673"
+  },
+  {
+    "title": "Inside Out 2",
+    "year": 2024,
+    "tmdbid": 1022789,
+    "imdbid": "tt22022452"
+  },
+  {
+    "title": "It's a Wonderful Life",
+    "year": 1946,
+    "tmdbid": 1585,
+    "imdbid": "tt0038650"
+  },
+  {
+    "title": "Jumanji",
+    "year": 1995,
+    "tmdbid": 8844,
+    "imdbid": "tt0113497"
+  },
+  {
+    "title": "KPop Demon Hunters",
+    "year": 2025,
+    "tmdbid": 803796,
+    "imdbid": "tt14205554"
+  },
+  {
+    "title": "Kung Fu Panda",
+    "year": 2008,
+    "tmdbid": 9502,
+    "imdbid": "tt0441773"
+  },
+  {
+    "title": "Kung Fu Panda 2",
+    "year": 2011,
+    "tmdbid": 49444,
+    "imdbid": "tt1302011"
+  },
+  {
+    "title": "Kung Fu Panda 3",
+    "year": 2016,
+    "tmdbid": 140300,
+    "imdbid": "tt2267968"
+  },
+  {
+    "title": "Kung Fu Panda 4",
+    "year": 2024,
+    "tmdbid": 1011985,
+    "imdbid": "tt21692408"
+  },
+  {
+    "title": "Lightyear",
+    "year": 2022,
+    "tmdbid": 718789,
+    "imdbid": "tt10298810"
+  },
+  {
+    "title": "Luca",
+    "year": 2021,
+    "tmdbid": 508943,
+    "imdbid": "tt12801262"
+  },
+  {
+    "title": "Madagascar",
+    "year": 2005,
+    "tmdbid": 953,
+    "imdbid": "tt0351283"
+  },
+  {
+    "title": "Madagascar 3: Europe's Most Wanted",
+    "year": 2012,
+    "tmdbid": 80321,
+    "imdbid": "tt1277953"
+  },
+  {
+    "title": "Madagascar: Escape 2 Africa",
+    "year": 2008,
+    "tmdbid": 10527,
+    "imdbid": "tt0479952"
+  },
+  {
+    "title": "Megamind",
+    "year": 2010,
+    "tmdbid": 38055,
+    "imdbid": "tt1001526"
+  },
+  {
+    "title": "Migration",
+    "year": 2023,
+    "tmdbid": 940551,
+    "imdbid": "tt6495056"
+  },
+  {
+    "title": "Minions",
+    "year": 2015,
+    "tmdbid": 211672,
+    "imdbid": "tt2293640"
+  },
+  {
+    "title": "Minions & Monsters",
+    "year": 2026,
+    "tmdbid": 1315772,
+    "imdbid": "tt32890033"
+  },
+  {
+    "title": "Minions: The Rise of Gru",
+    "year": 2022,
+    "tmdbid": 438148,
+    "imdbid": "tt5113044"
+  },
+  {
+    "title": "Moana",
+    "year": 2026,
+    "tmdbid": 1108427,
+    "imdbid": "tt27419466"
+  },
+  {
+    "title": "Moana",
+    "year": 2016,
+    "tmdbid": 277834,
+    "imdbid": "tt3521164"
+  },
+  {
+    "title": "Monsters University",
+    "year": 2013,
+    "tmdbid": 62211,
+    "imdbid": "tt1453405"
+  },
+  {
+    "title": "Monsters vs Aliens",
+    "year": 2009,
+    "tmdbid": 15512,
+    "imdbid": "tt0892782"
+  },
+  {
+    "title": "Monsters, Inc.",
+    "year": 2001,
+    "tmdbid": 585,
+    "imdbid": "tt0198781"
+  },
+  {
+    "title": "Mr. Peabody & Sherman",
+    "year": 2014,
+    "tmdbid": 82703,
+    "imdbid": "tt0864835"
+  },
+  {
+    "title": "Onward",
+    "year": 2020,
+    "tmdbid": 508439,
+    "imdbid": "tt7146812"
+  },
+  {
+    "title": "Orion and the Dark",
+    "year": 2024,
+    "tmdbid": 1139829,
+    "imdbid": "tt28066777"
+  },
+  {
+    "title": "Over the Hedge",
+    "year": 2006,
+    "tmdbid": 7518,
+    "imdbid": "tt0327084"
+  },
+  {
+    "title": "Penguins of Madagascar",
+    "year": 2014,
+    "tmdbid": 270946,
+    "imdbid": "tt1911658"
+  },
+  {
+    "title": "Puss in Boots",
+    "year": 2011,
+    "tmdbid": 417859,
+    "imdbid": "tt0448694"
+  },
+  {
+    "title": "Puss in Boots: The Last Wish",
+    "year": 2022,
+    "tmdbid": 315162,
+    "imdbid": "tt3915174"
+  },
+  {
+    "title": "Ratatouille",
+    "year": 2007,
+    "tmdbid": 2062,
+    "imdbid": "tt0382932"
+  },
+  {
+    "title": "Rise of the Guardians",
+    "year": 2012,
+    "tmdbid": 81188,
+    "imdbid": "tt1446192"
+  },
+  {
+    "title": "Ruby Gillman, Teenage Kraken",
+    "year": 2023,
+    "tmdbid": 1040148,
+    "imdbid": "tt27155038"
+  },
+  {
+    "title": "Shark Tale",
+    "year": 2004,
+    "tmdbid": 10555,
+    "imdbid": "tt0307453"
+  },
+  {
+    "title": "Shrek",
+    "year": 2001,
+    "tmdbid": 808,
+    "imdbid": "tt0126029"
+  },
+  {
+    "title": "Shrek 2",
+    "year": 2004,
+    "tmdbid": 809,
+    "imdbid": "tt0298148"
+  },
+  {
+    "title": "Shrek Forever After",
+    "year": 2010,
+    "tmdbid": 10192,
+    "imdbid": "tt0892791"
+  },
+  {
+    "title": "Shrek the Third",
+    "year": 2007,
+    "tmdbid": 810,
+    "imdbid": "tt0413267"
+  },
+  {
+    "title": "Sinbad: Legend of the Seven Seas",
+    "year": 2003,
+    "tmdbid": 14411,
+    "imdbid": "tt0165982"
+  },
+  {
+    "title": "Sing",
+    "year": 2016,
+    "tmdbid": 335797,
+    "imdbid": "tt3470600"
+  },
+  {
+    "title": "Sing 2",
+    "year": 2021,
+    "tmdbid": 438695,
+    "imdbid": "tt6467266"
+  },
+  {
+    "title": "Soul",
+    "year": 2020,
+    "tmdbid": 508442,
+    "imdbid": "tt2948372"
+  },
+  {
+    "title": "Spider-Man: Across the Spider-Verse",
+    "year": 2023,
+    "tmdbid": 569094,
+    "imdbid": "tt9362722"
+  },
+  {
+    "title": "Spider-Man: Into the Spider-Verse",
+    "year": 2018,
+    "tmdbid": 324857,
+    "imdbid": "tt4633694"
+  },
+  {
+    "title": "Spirit Untamed",
+    "year": 2021,
+    "tmdbid": 637693,
+    "imdbid": "tt11084896"
+  },
+  {
+    "title": "Spirit: Stallion of the Cimarron",
+    "year": 2002,
+    "tmdbid": 9023,
+    "imdbid": "tt0166813"
+  },
+  {
+    "title": "Swapped",
+    "year": 2026,
+    "tmdbid": 1007757,
+    "imdbid": "tt29552248"
+  },
+  {
+    "title": "Tangled",
+    "year": 2010,
+    "tmdbid": 38757,
+    "imdbid": "tt0398286"
+  },
+  {
+    "title": "Tangled Ever After",
+    "year": 2012,
+    "tmdbid": 82881,
+    "imdbid": "tt2112281"
+  },
+  {
+    "title": "Tangled: Before Ever After",
+    "year": 2017,
+    "tmdbid": 438747,
+    "imdbid": "tt5533228"
+  },
+  {
+    "title": "Tangled: The Musical",
+    "year": 2020,
+    "tmdbid": 708392,
+    "imdbid": null
+  },
+  {
+    "title": "The Bad Guys",
+    "year": 2022,
+    "tmdbid": 629542,
+    "imdbid": "tt8115900"
+  },
+  {
+    "title": "The Bad Guys 2",
+    "year": 2025,
+    "tmdbid": 1175942,
+    "imdbid": "tt30017619"
+  },
+  {
+    "title": "The Boss Baby",
+    "year": 2017,
+    "tmdbid": 295693,
+    "imdbid": "tt3874544"
+  },
+  {
+    "title": "The Boss Baby: Family Business",
+    "year": 2021,
+    "tmdbid": 459151,
+    "imdbid": "tt6932874"
+  },
+  {
+    "title": "The Breadwinner",
+    "year": 2026,
+    "tmdbid": 1440050,
+    "imdbid": "tt34459219"
+  },
+  {
+    "title": "The Cat in the Hat",
+    "year": 2003,
+    "tmdbid": 10588,
+    "imdbid": "tt0312528"
+  },
+  {
+    "title": "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe",
+    "year": 2005,
+    "tmdbid": 411,
+    "imdbid": "tt0363771"
+  },
+  {
+    "title": "The Croods",
+    "year": 2013,
+    "tmdbid": 49519,
+    "imdbid": "tt0481499"
+  },
+  {
+    "title": "The Croods: A New Age",
+    "year": 2020,
+    "tmdbid": 529203,
+    "imdbid": "tt2850386"
+  },
+  {
+    "title": "The Good Dinosaur",
+    "year": 2015,
+    "tmdbid": 105864,
+    "imdbid": "tt1979388"
+  },
+  {
+    "title": "The Goonies",
+    "year": 1985,
+    "tmdbid": 9340,
+    "imdbid": "tt0089218"
+  },
+  {
+    "title": "The Grinch",
+    "year": 2018,
+    "tmdbid": 360920,
+    "imdbid": "tt2709692"
+  },
+  {
+    "title": "The Incredibles",
+    "year": 2004,
+    "tmdbid": 9806,
+    "imdbid": "tt0317705"
+  },
+  {
+    "title": "The Lion King",
+    "year": 1994,
+    "tmdbid": 8587,
+    "imdbid": "tt0110357"
+  },
+  {
+    "title": "The Lorax",
+    "year": 2012,
+    "tmdbid": 73723,
+    "imdbid": "tt1482459"
+  },
+  {
+    "title": "The Mandalorian and Grogu",
+    "year": 2026,
+    "tmdbid": 1228710,
+    "imdbid": "tt30825738"
+  },
+  {
+    "title": "The Muppet Show",
+    "year": 2026,
+    "tmdbid": 1548113,
+    "imdbid": "tt37969426"
+  },
+  {
+    "title": "The Nightmare Before Christmas",
+    "year": 1993,
+    "tmdbid": 9479,
+    "imdbid": "tt0107688"
+  },
+  {
+    "title": "The Parent Trap",
+    "year": 1998,
+    "tmdbid": 9820,
+    "imdbid": "tt0120783"
+  },
+  {
+    "title": "The Prince of Egypt",
+    "year": 1998,
+    "tmdbid": 9837,
+    "imdbid": "tt0120794"
+  },
+  {
+    "title": "The Princess Bride",
+    "year": 1987,
+    "tmdbid": 2493,
+    "imdbid": "tt0093779"
+  },
+  {
+    "title": "The Road to El Dorado",
+    "year": 2000,
+    "tmdbid": 10501,
+    "imdbid": "tt0138749"
+  },
+  {
+    "title": "The School of Rock",
+    "year": 2003,
+    "tmdbid": 1584,
+    "imdbid": "tt0332379"
+  },
+  {
+    "title": "The Secret Life of Pets",
+    "year": 2016,
+    "tmdbid": 328111,
+    "imdbid": "tt2709768"
+  },
+  {
+    "title": "The Secret Life of Pets 2",
+    "year": 2019,
+    "tmdbid": 412117,
+    "imdbid": "tt5113040"
+  },
+  {
+    "title": "The Super Mario Bros. Movie",
+    "year": 2023,
+    "tmdbid": 502356,
+    "imdbid": "tt6718170"
+  },
+  {
+    "title": "The Super Mario Galaxy Movie",
+    "year": 2026,
+    "tmdbid": 1226863,
+    "imdbid": "tt28650488"
+  },
+  {
+    "title": "The Transformers: The Movie",
+    "year": 1986,
+    "tmdbid": 1857,
+    "imdbid": "tt0092106"
+  },
+  {
+    "title": "The Wild Robot",
+    "year": 2024,
+    "tmdbid": 1184918,
+    "imdbid": "tt29623480"
+  },
+  {
+    "title": "Top Gun",
+    "year": 1986,
+    "tmdbid": 744,
+    "imdbid": "tt0092099"
+  },
+  {
+    "title": "Top Gun: Maverick",
+    "year": 2022,
+    "tmdbid": 361743,
+    "imdbid": "tt1745960"
+  },
+  {
+    "title": "Toy Story",
+    "year": 1995,
+    "tmdbid": 862,
+    "imdbid": "tt0114709"
+  },
+  {
+    "title": "Toy Story 2",
+    "year": 1999,
+    "tmdbid": 863,
+    "imdbid": "tt0120363"
+  },
+  {
+    "title": "Toy Story 3",
+    "year": 2010,
+    "tmdbid": 10193,
+    "imdbid": "tt0435761"
+  },
+  {
+    "title": "Toy Story 4",
+    "year": 2019,
+    "tmdbid": 301528,
+    "imdbid": "tt1979376"
+  },
+  {
+    "title": "Toy Story 5",
+    "year": 2026,
+    "tmdbid": 1084244,
+    "imdbid": "tt29355505"
+  },
+  {
+    "title": "Trolls",
+    "year": 2016,
+    "tmdbid": 136799,
+    "imdbid": "tt1679335"
+  },
+  {
+    "title": "Trolls Band Together",
+    "year": 2023,
+    "tmdbid": 901362,
+    "imdbid": "tt14362112"
+  },
+  {
+    "title": "Trolls World Tour",
+    "year": 2020,
+    "tmdbid": 446893,
+    "imdbid": "tt6587640"
+  },
+  {
+    "title": "Turbo",
+    "year": 2013,
+    "tmdbid": 77950,
+    "imdbid": "tt1860353"
+  },
+  {
+    "title": "Turning Red",
+    "year": 2022,
+    "tmdbid": 508947,
+    "imdbid": "tt8097030"
+  },
+  {
+    "title": "Up",
+    "year": 2009,
+    "tmdbid": 14160,
+    "imdbid": "tt1049413"
+  },
+  {
+    "title": "Wallace & Gromit: The Curse of the Were-Rabbit",
+    "year": 2005,
+    "tmdbid": 533,
+    "imdbid": "tt0312004"
+  },
+  {
+    "title": "WALL·E",
+    "year": 2008,
+    "tmdbid": 10681,
+    "imdbid": "tt0910970"
+  },
+  {
+    "title": "Zootopia 2",
+    "year": 2025,
+    "tmdbid": 1084242,
+    "imdbid": "tt26443597"
+  }
+]
