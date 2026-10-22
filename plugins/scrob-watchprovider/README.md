@@ -2,7 +2,7 @@
 
 Watch provider plugin for Scrob (self-hosted watch history / progress tracker),
 vendored from [Joloxx9/silo-plugin-watchprovider-scrob](https://github.com/Joloxx9/silo-plugin-watchprovider-scrob)
-v0.1.3. Binaries are the upstream release artifacts (checksum-verified);
+v0.1.4. Binaries are the upstream release artifacts (checksum-verified);
 only the manifest is copied here so the repo index can reference it.
 
 - Connects each Vio profile to a self-hosted Scrob instance.

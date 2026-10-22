@@ -32,7 +32,7 @@ func main() {
 		{"vio-pmdb-lists", "0.3.0"},
 		{"silo-pmdb-lists", "0.1.0"},
 		{"vio-aiostreams-watchsync", "0.1.0"},
-		{"scrob-watchprovider", "0.1.3"},
+		{"scrob-watchprovider", "0.1.4"},
 		{"kometa-artwork", "0.1.0"},
 		{"vio-cover-studio", "0.1.1"},
 	}
